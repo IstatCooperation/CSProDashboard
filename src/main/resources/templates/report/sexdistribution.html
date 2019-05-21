@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="layout :: site-head"/>
+    <head>
+        <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
+        <script th:src="@{/js/table/datatables.js}" type="text/javascript"></script>
+        <script th:src="@{/js/chart/chart.bundle.min.js}" type="text/javascript"></script>
+        <script th:src="@{/js/chart/dashboardChart.js}" type="text/javascript"></script>
+        <script th:src="@{/js/report/sexdistributionList.js}" type="text/javascript"></script>
+    </head>
+    
+    <body>
+
+        <div class="wrapper">    
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        <ol class="breadcrumb">
+                            <li>Analysis Report</li>
+                            <li>Sex Distribution by Country</li>
+                        </ol>
+                    </div>
+                    <div class="container-fluid sexdistribution-fluid">
+                        <div class="row mb-lg">
+                            <div class="col-lg-8" >
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Male and female sex distribution chart
+                                    </div>
+                                    <div class="panel-body">
+                                        <canvas id="bar-chart-area" />
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer th:replace="layout :: site-footer" />
+
+        </div>
+    </body>
+</html>

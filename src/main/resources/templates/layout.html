@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:fragment="site-head">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="IE=10.000" http-equiv="X-UA-Compatible" />
+        <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}" />
+        <title>CSPro Dashboard</title>
+        <script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>
+        <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+        <script th:src="@{/js/dashboard.js}" type="text/javascript"></script>
+        <script type="text/javascript">var ctx = $("meta[name='ctx']").attr("content");</script>
+        <!-- CSS -->
+        <link th:href="@{/css/custom_bootstrap.css}" rel="stylesheet" />
+        <link th:href="@{/css/dashboard.css}" rel="stylesheet" />
+        <link th:href="@{/css/fixed_menu.css}" rel="stylesheet" />
+        <!-- Fontawesome -->
+        <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header th:fragment="site-header" th:remove="tag">
+                <div class="topnavbar-wrapper">
+                    <nav role="navigation" class="navbar navbar-default navbar-fixed-top topnavbar">
+                        <div class="navbar-brand">
+                            CSPro Dashboard 
+                            <span class="toggle-menu" onclick="toggleMenu()"><i id="toggle-menu" class="fa fa-bars"></i></span>
+                        </div>
+                        <div class="nav pull-right small-screen">
+                            <div class="btn-group btn-group-xs">
+                                <a sec:authorize="isAuthenticated()" href="#" th:href="@{/users/logout}" class="btn navbar-btn">
+                                    <i class="fa fa-sign-out fa-fw"></i>
+                                    <span class="small-screen-hide">
+                                        Sign out
+                                        <strong sec:authentication="name">User</strong>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+
+                <div class="loading modal fade" id="loading" role="dialog">
+                    <div class="modal-content">             
+                        <div class="loader">
+                            <i class="fa fa-spinner fa-spin fa-4x fa-fw"></i>
+                            <span>
+                                <strong>Loading data...</strong>
+                            </span>
+                        </div>    
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modalInfo" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <span class="modal-title">
+                                    Report description
+                                </span>
+                            </div>
+                            <div class="modal-body">
+                                <span>
+                                    An Enumeration Area is considered to be returned when at least one 
+                                    questionnaire arrived at CSA
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </header>
+
+            <aside th:fragment="site-aside" th:remove="tag">
+                <aside class="aside">
+                    <div class="aside-inner">
+                        <nav data-sidebar-anyclick-close="" class="sidebar">
+                            <ul class="nav">
+                                <li class="nav-body menu-spacer">
+                                    <a id="Home" href="index.html" title="Home" th:href="@{/}" > 
+                                        <i class="fa fa-home"></i>
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li class="nav-body" sec:authorize="hasRole('ADMIN') || hasRole('PROGRESS')">
+                                    <a href="#process" title="Process Report" data-toggle="collapse" class="collapsed" aria-expanded="false">
+                                        <i class="fa fa-cogs"></i>
+                                        <span>Progress Report</span>
+                                    </a>
+                                    <ul id="process" class="nav sidebar-subnav collapse" aria-expanded="false">
+                                        <li id="report-total-ea" th:if="${reports.contains('r_total')}">
+                                            <a title="EAs by COUNTRY" th:href="@{/report/totalEa}">
+                                                <span>EAs by COUNTRY</span>
+                                            </a>
+                                        </li>
+                                        <li id="report-total-household" th:if="${reports.contains('r_total')}">
+                                            <a title="Households by COUNTRY" th:href="@{/report/totalHousehold}">
+                                                <span>Households by COUNTRY</span>
+                                            </a>
+                                        </li>
+                                        <li th:id="${'report-household-' + rep}" th:each="rep,iterationStatus : ${householdReports}">
+                                            <a th:title="${'Households by ' + rep.toUpperCase()}" th:href="@{/report/household/} + ${rep}" th:text="${'Households by ' + rep.toUpperCase()}"></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-body" sec:authorize="hasRole('ADMIN') || hasRole('ANALYST')">
+                                    <a href="#data"
+                                       title="Analysis Report" data-toggle="collapse" class="collapsed"
+                                       aria-expanded="false">
+                                        <i class="fa fa-file-text-o"></i>
+                                        <span>Analysis Report</span>
+                                    </a>
+                                    <ul id="data" class="nav sidebar-subnav collapse"
+                                        aria-expanded="false">
+                                        <li id="report-population" th:if="${reports.contains('r_individual_info')}">
+                                            <a title="Population" th:href="@{/report/population}">
+                                                <span>Population</span>
+                                            </a>
+                                        </li>
+                                        <li id="report-questionnaire" th:if="${reports.contains('r_questionnaire_info')}">
+                                            <a title="Household" th:href="@{/report/questionnaire}">
+                                                <span>Households</span>
+                                            </a>
+                                        </li>
+                                        <li id="report-sexdistribution" th:if="${reports.contains('r_sex_by_age_group')}">
+                                            <a title="Sex Distribution" th:href="@{/report/sexdistribution}">
+                                                <span>Sex Distribution by Country</span>
+                                            </a>
+                                        </li>
+                                        <li id="report-sexdistributionRegion" th:if="${reports.contains('r_sex_by_age_group_region')}">
+                                            <a title="Sex Distribution by Region" th:href="@{/report/sexdistributionRegion}">
+                                                <span>Sex Distribution by Region</span>
+                                            </a>
+                                        </li>
+                                        <!--li id="report-populationResidence" th:if="${reports.contains('r_population_type_of_residence')}">
+                                            <a title="Religion" th:href="@{/report/populationResidence}">
+                                                <span>Table 2.3</span>
+                                            </a>
+                                        </li-->
+                                    </ul>
+                                </li>
+
+                                <li class="nav-body menu-spacer" sec:authorize="hasRole('ADMIN') || hasRole('PROGRESS')">
+                                    <a href="#gis" title="GIS maps" data-toggle="collapse" class="collapsed" aria-expanded="false">
+                                        <i class="fa fa-map-marker"></i>
+                                        <span>GIS maps</span>
+                                    </a>
+                                    <!--ul id="gis" class="nav sidebar-subnav collapse" aria-expanded="false">
+                                        <li id="maps-by-region">
+                                            <a title="Maps by Region" th:href="@{/gis/region}">
+                                                <span>Maps by Region</span>
+                                            </a>
+                                        </li>
+                                    </ul-->
+                                </li>
+
+                                <li class="nav-body" sec:authorize="hasRole('ADMIN')">
+                                    <a href="#cspro2sql" title="CSPro2Sql" data-toggle="collapse"
+                                       class="collapsed" aria-expanded="false">
+                                        <i class="fa fa-tasks"></i>
+                                        <span>CSPro2Sql</span>
+                                    </a>
+                                    <ul id="cspro2sql" class="nav sidebar-subnav collapse" aria-expanded="false">
+                                        <li id="cspro2sql-errors">
+                                            <a title="Errors" th:href="@{/admin/errors}">
+                                                <i class="fa fa-exclamation-triangle"></i>
+                                                <span>Loading errors</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-body" sec:authorize="hasRole('ADMIN')">
+                                    <a th:href="@{/users/userlist}" title="Administration">
+                                        <i class="fa fa-briefcase"></i>
+                                        <span>Administration</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
+            </aside>
+
+            <section>
+                <!-- Business logic goes here-->
+            </section>
+
+            <footer th:fragment="site-footer">
+                Istat Cooperation
+            </footer>
+
+        </div>
+
+    </body>
+</html>

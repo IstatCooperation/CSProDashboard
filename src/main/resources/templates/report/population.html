@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: site-head"/>
+    <head>
+        <script>
+            $(function () {
+                setMenuActive("report-population");
+                $.getJSON(ctx + "/rest/report/individualInfo", function (populationReport) {
+                    $('#questionnaireCount1').text(format(populationReport[0][1]));
+                    $('#questionnaireCount2').text(format(populationReport[0][2]));
+                    $('#questionnaireCount3').text(format(populationReport[0][3]));
+                    $('#questionnaireCount4').text(format(populationReport[0][4]));
+                    $('#questionnaireCount5').text(format(populationReport[0][5]));
+                    $('#questionnaireCount6').text(format(populationReport[0][6]));
+                    $('#questionnaireCount7').text(format(populationReport[0][7]));
+                    $('#questionnaireCount8').text(format(populationReport[0][8]));
+                    $('#questionnaireCount9').text(format(populationReport[0][9]));
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Body -->    
+        <div class="wrapper">
+
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+
+            <!-- START MAIN CONTAINER -->
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        <ol class="breadcrumb">
+                            <li>Analysis report </li>
+                            <li>Population</li>
+                        </ol>
+                    </div>
+
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-lg-12" style="margin-bottom: 5px">
+                                <span class="widget-title">Total population</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- START WIDGET -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="panel widget bg-blue">
+                                    <div class="row row-table">
+                                        <div class="col-xs-4 text-center bg-blue-dark ">
+                                            <em class="fa fa-child fa-3x"></em>
+                                        </div>
+                                        <div class="col-xs-8 widget-content">
+                                            <div class="h3 mt0" id="questionnaireCount1"></div>
+                                            <div class="text-uppercase">Total individuals</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END WIDGET -->
+
+                            <!-- START WIDGET -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="panel widget bg-blue">
+                                    <div class="row row-table">
+                                        <div class="col-xs-4 text-center bg-blue-dark ">
+                                            <em class="fa fa-male fa-3x"></em>
+                                        </div>
+                                        <div class="col-xs-8 widget-content">
+                                            <div class="h3 mt0" id="questionnaireCount4"></div>
+                                            <div class="text-uppercase">Total Males</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END WIDGET -->
+
+                            <!-- START WIDGET -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="panel widget bg-blue">
+                                    <div class="row row-table">
+                                        <div class="col-xs-4 text-center bg-blue-dark ">
+                                            <em class="fa fa-female fa-3x"></em>
+                                        </div>
+                                        <div class="col-xs-8 widget-content">
+                                            <div class="h3 mt0" id="questionnaireCount7"></div>
+                                            <div class="text-uppercase">Total Females</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END WIDGET -->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12" style="margin-bottom: 5px">
+                                <span class="widget-title">Average population age</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- START WIDGET -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="panel widget bg-blue">
+                                    <div class="row row-table">
+                                        <div class="col-xs-4 text-center bg-blue-dark pv-lg">
+                                            <em class="fa fa-hourglass-2 fa-3x"></em>
+                                        </div>
+                                        <div class="col-xs-8 widget-content">
+                                            <div class="h3 mt0" id="questionnaireCount2"></div>
+                                            <div class="text-uppercase">Average Age</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END WIDGET -->
+
+                            <!-- START WIDGET -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="panel widget bg-blue">
+                                    <div class="row row-table">
+                                        <div class="col-xs-4 text-center bg-blue-dark pv-lg">
+                                            <em class="fa fa-hourglass-2 fa-3x"></em>
+                                        </div>
+                                        <div class="col-xs-8 widget-content">
+                                            <div class="h3 mt0" id="questionnaireCount5"></div>
+                                            <div class="text-uppercase">Male Avg Age</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END WIDGET -->
+
+                            <!-- START WIDGET -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="panel widget bg-blue">
+                                    <div class="row row-table">
+                                        <div class="col-xs-4 text-center bg-blue-dark pv-lg">
+                                            <em class="fa fa-hourglass-2 fa-3x"></em>
+                                        </div>
+                                        <div class="col-xs-8 widget-content">
+                                            <div class="h3 mt0" id="questionnaireCount8"></div>
+                                            <div class="text-uppercase">Female Avg Age</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END WIDGET -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END MAIN CONTAINER -->
+            <footer th:replace="layout :: site-footer" />
+        </div><!-- wrapper -->
+    </body>
+</html>
+

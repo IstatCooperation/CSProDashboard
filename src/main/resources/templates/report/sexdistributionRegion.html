@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="layout :: site-head"/>
+    <head>
+        <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
+        <script th:src="@{/js/table/datatables.js}"></script>
+        <script th:src="@{/js/chart/chart.bundle.min.js}"></script>
+        <script th:src="@{/js/chart/dashboardChart.js}"></script>
+        <script th:src="@{/js/report/regions.js}"></script>
+        <script th:src="@{/js/report/sexdistributionRegionList.js}"></script>
+    </head>
+
+    <body>
+
+        <div class="wrapper">    
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        <ol class="breadcrumb">
+                            <li>Analysis Report</li>
+                            <li>Sex Distribution by Region</li>
+                        </ol>
+                    </div>
+                    <div class="container-fluid sexdistribution-fluid" id="template">
+                        <div class="row mb-lg">
+                            <div class="col-lg-8" >
+                                <div class="bs-callout">
+                                    <h4 class="regionName">Country</h4>
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <canvas id="bar-chart-area" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer th:replace="layout :: site-footer" />
+
+        </div>
+    </body>
+</html>

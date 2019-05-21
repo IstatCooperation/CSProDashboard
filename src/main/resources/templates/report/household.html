@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="layout :: site-head"/>
+    <head>
+        <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
+        <script th:src="@{/js/table/datatables.js}"></script>
+        <script th:src="@{/js/report/territory.js}"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var reportType = /*[[${reportType}]]*/;
+            var dashboardInfo = /*[[${dashboardInfo}]]*/;
+            /*]]>*/
+        </script>
+        <script th:src="@{/js/report/household.js}"></script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        <ol class="breadcrumb">
+                            <li>Progress report </li>
+                            <li>Household by <span th:text="${reportType.toUpperCase()}"></span></li>
+                        </ol>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row mb-lg row-padding"> 
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <table id="householdlist" class="table table-striped" cellspacing="0" width="100%">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer th:replace="layout :: site-footer" />
+        </div>
+    </body>
+</html>

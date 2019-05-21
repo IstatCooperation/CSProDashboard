@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="layout :: site-head"/>
+    <head>
+        <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
+        <script th:src="@{/js/table/datatables.js}"></script>
+        <script th:src="@{/js/report/populationResidence.js}"></script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        Table 2.3 - Population by Type of Residence, Sex, and Five Year Age Group: Census for 2018
+                        <small>Table</small>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row mb-lg"> 
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table id="populationlist" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Range</th>
+                                                <th>Residential</th>
+                                                <th>Hotel/ Hostel</th>
+                                                <th>Orphanage</th>
+                                                <th>Boarding School/ College/ University</th>
+                                                <th>Prison</th>
+                                                <th>Other Collective Quarter</th>
+                                                <th>Households wondering in search of Water and grass</th>
+                                                <th>Homeless</th>
+                                                <th>Foreigner/ Diplomats</th>
+                                                <th>Refugee camps</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-wrapper">
+                    <div class="bs-callout">
+                        <h4>Male</h4>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row mb-lg"> 
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table id="populationlistMale" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Range</th>
+                                                <th>Residential</th>
+                                                <th>Hotel/ Hostel</th>
+                                                <th>Orphanage</th>
+                                                <th>Boarding School/ College/ University</th>
+                                                <th>Prison</th>
+                                                <th>Other Collective Quarter</th>
+                                                <th>Households wondering in search of Water and grass</th>
+                                                <th>Homeless</th>
+                                                <th>Foreigner/ Diplomats</th>
+                                                <th>Refugee camps</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-wrapper">
+                    <div class="bs-callout">
+                        <h4>Female</h4>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row mb-lg"> 
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table id="populationlistFemale" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Range</th>
+                                                <th>Residential</th>
+                                                <th>Hotel/ Hostel</th>
+                                                <th>Orphanage</th>
+                                                <th>Boarding School/ College/ University</th>
+                                                <th>Prison</th>
+                                                <th>Other Collective Quarter</th>
+                                                <th>Households wondering in search of Water and grass</th>
+                                                <th>Homeless</th>
+                                                <th>Foreigner/ Diplomats</th>
+                                                <th>Refugee camps</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer th:replace="layout :: site-footer" />
+
+        </div>
+    </body>
+
+</html>
+

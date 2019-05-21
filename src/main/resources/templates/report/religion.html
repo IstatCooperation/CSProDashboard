@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: site-head"/>
+    <head>
+        <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
+        <script th:src="@{/js/table/datatables.js}" type="text/javascript"></script>
+        <script th:src="@{/js/chart/chart.bundle.min.js}" type="text/javascript"></script>
+        <script th:src="@{/js/chart/dashboardChart.js}" type="text/javascript"></script>
+        <script th:src="@{/js/report/religionList.js}" type="text/javascript"></script>
+    </head>
+    <body>
+
+        <div class="wrapper">
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        Religion
+                        <small>Chart</small>
+                    </div>
+
+                    <div class="container-fluid religion-fluid">
+                        <div class="row mb-lg">
+                            <div class="panel panel-default col-lg-6">
+                                <div class="panel-body">
+                                    <h3 class="page-header page-header-data">Data</h3>
+                                    <table id="religionlist" class="table table-striped" cellspacing="0" width="100%">
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-default col-lg-6">
+                                <div class="panel-body">
+                                    <h3 class="page-header page-header-doughnut">Doughnut chart</h3>
+                                    <canvas id="doughnut-chart-area" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer th:replace="layout :: site-footer" />
+        </div>
+    </body>
+</html>
+
+

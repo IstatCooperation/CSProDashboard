@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: site-head" />
+    <head>
+        <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
+        <script th:src="@{/js/table/datatables.js}" type="text/javascript"></script>
+        <script th:src="@{/js/user/usersList.js}" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        <ol class="breadcrumb">
+                            <li>Administration</li>
+                            <li>Users</li>
+                        </ol>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <button class="btn btn-default" id="btnAddUser"
+                                    onclick="add_user()" style="margin-bottom: 10px">
+                                <i class="fa fa-user-plus"></i> Add User
+                            </button>
+                            <table id="userslist" class="table table-striped" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Firstname</th>
+                                        <th>Lastname</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer th:replace="layout :: site-footer" />
+        </div>
+
+        <div class="modal fade" id="modal_form" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">User Form</h4>
+                    </div>
+                    <div class="modal-body form">
+                        <form action="#" id="form" class="form-horizontal">
+                            <input type="hidden" value="" name="id" />
+                            <div class="form-body">
+                                <div id="msgs"></div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Email*</label>
+                                    <div class="col-md-9">
+                                        <input name="email" placeholder="Email" class="form-control" title="Email" type="text" readonly="readonly" />
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group password_group" id="password_group">
+                                    <label class="control-label col-md-3">Password*</label>
+                                    <div class="col-md-9">
+                                        <input name="password" placeholder="Password" data-toggle="tooltip" title="Password" id="form_password" class="form-control" type="password" />
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Firstname*</label>
+                                    <div class="col-md-9">
+                                        <input name="firstname" placeholder="Firstname" class="form-control" data-toggle="tooltip" title="Firstname" type="text" />
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Lastname*</label>
+                                    <div class="col-md-9">
+                                        <input name="lastname" placeholder="Lastname" title="Lastname" class="form-control" type="text" />
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Role</label>
+                                    <div class="col-md-9">
+                                        <select name="role" class="form-control">
+                                            <option th:each="rolei : ${allRoles}" th:value="${rolei}" th:text="${rolei}">Role</option>
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
+                        <button type="button" id="btnClose" class="btn btn-danger" data-dismiss="modal" onclick="close()">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalDelete_form" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Delete User</h4>
+                    </div>
+                    <div class="modal-body form">
+                        <div id="msgsDel"></div>
+                        <div id="delContent">
+                            Delete user <strong><span id="delEmail"></span></strong>?
+                            <input type="hidden" id="delId" value="" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnDelete" onclick="delete_user()"
+                                class="btn btn-primary">Delete</button>
+                        <button type="button" id="btnDeleteClose" class="btn btn-danger"
+                                data-dismiss="modal" onclick="close()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalCp_form" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Change Password User</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="msgsCp" class="form-group"></div>
+                        <div id="pwdText">
+                            <div class="form-group">
+                                Change Password for user <strong><span id="cpEmail"></span></strong>
+                                <input type="hidden" id="cpId" value="" />
+                            </div>
+                            <div>
+                                <div>
+                                    <input id="passwordcp" placeholder="Password" class="form-control" type="password" title="Password" /> 
+                                    <span class="help-block"></span>
+                                </div>
+                                <div>
+                                    <input id="passwordcp1" placeholder="Repeat Password" title="Repeat Password" class="form-control" type="password" />
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnChangePassword" class="btn btn-primary" disabled="disabled" onclick="update_password()">Change</button>
+                        <button type="button" id="btnCpClose" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+

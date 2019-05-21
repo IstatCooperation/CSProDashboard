@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: site-head"/>
+    <head>
+        <script>
+            $(function () {
+                setMenuActive("home");
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Body -->    
+        <div class="wrapper">
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+            <!-- START MAIN CONTAINER -->
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        <ol class="breadcrumb">
+                            <li>Home</li>
+                        </ol>
+                    </div>
+                    <!-- START PANEL-->
+                    <div class="bs-callout">
+                        <h4>Welcome to CSPro Dashboard</h4>
+                        <p style="margin-top: 15px">
+                            Choose a report <span sec:authentication="name">User</span>!  
+                        </p>
+                    </div>
+                    <!-- END PANEL-->
+                </div>
+            </section>
+            <!-- END MAIN CONTAINER -->
+            <footer th:replace="layout :: site-footer" />
+        </div><!-- wrapper -->
+    </body>
+</html>

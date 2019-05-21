@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="layout :: site-head"/>
+    <head>
+        <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
+        <script th:src="@{/js/table/datatables.js}"></script>
+        <script th:src="@{/js/gis/gisClient.js}"></script>
+        <script>
+            function update() {
+                $('.regionImg').hide();
+                $('#region' + $('#region').val()).show();
+            }
+            $(document).ready(function () {
+                setMenuActive("maps-by-region");
+                update();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        Region map
+                        <small>GIS</small>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row mb-lg"> 
+                            <div class="bs-callout">
+                                <h4>
+                                    Region:
+                                    <select onchange="javascript:update()" id="region">
+                                        <option value="6" selected="selected">Benshangul gumuz</option>
+                                        <option value="12">Gambela</option>
+                                        <option value="1">Tigray</option>
+                                    </select>
+                                </h4>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body text-center">
+                                    <img id="region6" class="regionImg" th:src="@{/img/Benshangulgumuz.png}" alt="Benshangul gumuz" />
+                                    <img id="region12" class="regionImg" th:src="@{/img/Gambela.png}" alt="Gambela" />
+                                    <img id="region1" class="regionImg" th:src="@{/img/Tigray.png}" alt="Tigray" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer th:replace="layout :: site-footer" />
+
+        </div>
+    </body>
+
+</html>
+
