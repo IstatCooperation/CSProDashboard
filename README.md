@@ -106,6 +106,8 @@ java –jar csprodashboard.jar
 
 It is also possible to create a war file that can be deployed on a servlet container such as Tomcat. Simply modify the maven build profile to DashboardWar.
 
+A detailed guide to install the dashboard is available in the doc folder
+
 ## Acknowledgement
 The team responsible of [Census and Survey Processing System (CSPro)](https://www.census.gov/population/international/software/cspro/) 
 
