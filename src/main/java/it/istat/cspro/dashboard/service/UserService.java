@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public User findOne(Long id) {
-        return this.userDao.findOne(id);
+        return this.userDao.findById(id).orElse(null);
     }
 
     public User findByEmail(String email) {
@@ -44,7 +44,7 @@ public class UserService {
     }
 
     public User update(UserUpdateForm uf) throws Exception {
-        User user = userDao.findOne(uf.getId());
+        User user = userDao.findById(uf.getId()).orElse(null);
         if (user == null) {
             throw new Exception("User not found");
         }
@@ -69,7 +69,7 @@ public class UserService {
     }
 
     public User updatePasswordById(Long id, String password) throws Exception {
-        User user = userDao.findOne(id);
+        User user = userDao.findById(id).orElse(null);
         if (user == null) {
             throw new Exception("User not found");
         }
@@ -80,7 +80,7 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        userDao.delete(id);
+        userDao.deleteById(id);
     }
 
 }

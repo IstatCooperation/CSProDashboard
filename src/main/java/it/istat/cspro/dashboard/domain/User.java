@@ -3,8 +3,8 @@ package it.istat.cspro.dashboard.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -25,7 +25,7 @@ public class User implements Serializable {
     @Column(name = "password", length = 100)
     private String password;
 
-    @Email
+    @Pattern(regexp=".+@.+\\..+")
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 

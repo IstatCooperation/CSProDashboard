@@ -1,12 +1,12 @@
 package it.istat.cspro.dashboard.forms;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
 
 public class LoginForm {
 
-    @Email
+    @Pattern(regexp=".+@.+\\..+")
     @NotNull
     private String email;
 

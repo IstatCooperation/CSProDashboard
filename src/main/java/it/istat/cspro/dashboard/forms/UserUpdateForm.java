@@ -2,8 +2,8 @@ package it.istat.cspro.dashboard.forms;
 
 import it.istat.cspro.dashboard.domain.User;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
 
 public class UserUpdateForm {
 
@@ -11,7 +11,7 @@ public class UserUpdateForm {
     private Long id;
 
     @NotNull
-    @Email
+    @Pattern(regexp=".+@.+\\..+")
     @Size(min = 2, max = 100)
     private String email;
 

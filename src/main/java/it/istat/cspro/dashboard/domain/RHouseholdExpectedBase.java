@@ -4,15 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author Istat Cooperation Unit
  */
+@Entity
 public class RHouseholdExpectedBase implements Serializable {
 
     private static final long serialVersionUID = 964092318764339808L;
 
+    @Id
     private int id;
     private String name;
     private Integer field;
