@@ -166,13 +166,19 @@
                                         <span>CSPro2Sql</span>
                                     </a>
                                     <ul id="cspro2sql" class="nav sidebar-subnav collapse" aria-expanded="false">
+                                        <li id="cspro2sql-dictionaries">
+                                            <a title="Dictionaries List" th:href="@{/admin/dictionaries}">
+                                                <i class="fa fa-book"></i>
+                                                <span>Dictionaries</span>
+                                            </a>
+                                        </li>
                                         <li id="cspro2sql-errors">
                                             <a title="Errors" th:href="@{/admin/errors}">
                                                 <i class="fa fa-exclamation-triangle"></i>
                                                 <span>Loading errors</span>
                                             </a>
-                                        </li>
-                                    </ul>
+                                        </li>                                        
+                                    </ul>                                    
                                 </li>
                                 <li class="nav-body" sec:authorize="hasRole('ADMIN')">
                                     <a th:href="@{/users/userlist}" title="Administration">
