@@ -128,7 +128,7 @@ function preview() {
     var file = document.getElementById('file').files[0];
     var lineno = 1;
     previewString = "";
-    readSomeLines(file, 15, function (line) {
+    readSomeLines(file, 25, function (line) {
         if (lineno == 1) {
             if (line.split(",").length > 1) {
                 $("#delimiter_sel").val(',');
@@ -148,7 +148,7 @@ function preview() {
         
     }, function onComplete() {
         console.log('Read all lines');
-        $("#PreviewTextarea").val(previewString);
+        $("#PreviewTextarea").val(previewString+"...");
     });
 }
 

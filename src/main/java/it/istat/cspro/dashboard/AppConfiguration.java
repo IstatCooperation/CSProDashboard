@@ -14,14 +14,8 @@
  * Licence for the specific language governing permissions and limitations under
  * the Licence.
  *
- * @author Francesco Amato <framato @ istat.it>
- * @author Mauro Bruno <mbruno @ istat.it>
- * @author Paolo Francescangeli  <pafrance @ istat.it>
- * @author Renzo Iannacone <iannacone @ istat.it>
- * @author Stefano Macone <macone @ istat.it>
- * @version 1.0
  */
-package it.istat.is2;
+package it.istat.cspro.dashboard;
 
 import java.util.Locale;
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: site-head" />
     <head>
-        <head th:include="layout :: site-head" th:remove="tag" />
         <script th:src="@{/js/table/datatables.js}"></script>
         <script th:src="@{/js/sessioni.js}"></script>
         <script th:src="@{/js/papaParse/papaparse.min.js}"></script>
@@ -19,12 +19,12 @@
             <!-- START MAIN CONTAINER -->
             <section>
                 <div class="content-wrapper">
-                    <nav aria-label="breadcrumb">
+                    <div class="content-heading">
                         <ol class="breadcrumb">
                             <li>CSPro2Sql</li>
                             <li>Dictionaries</li>
                         </ol>
-                    </nav>
+                    </div>
 
                     <div class="container-fluid">
                         <!--input id="idsessionelv" type="hidden" value="${session.sessionelv.id}" /-->
@@ -32,7 +32,6 @@
                             <div class="col-lg-7">
                                 <div class="card">
                                     <div class="card-header">
-                                        <span th:text="#{lista.dataset.legend}">Lista dataset</span>
                                     </div>
                                     <div class="card-body">
                                         <form id="inputFileForm" th:action="@{'/loadInputData'}" method="post" enctype="multipart/form-data">
@@ -45,9 +44,9 @@
                                                 <div class="col-lg-8">
                                                     <div class="form-group">
                                                         <label class="control-label"
-                                                               th:text="#{selection.file.legend}">Seleziona un file da caricare (txt o csv) </label>
+                                                               th:text="#{selection.file.legend}">Seleziona un file dizionario da caricare (dcf) </label>
                                                         <!-- Impostare data-show-preview a true per avere la preview del file -->
-                                                        <input id="file" accept=".csv,.txt" class="file" type="file" name="fileName"
+                                                        <input id="file" accept=".dcf" class="file" type="file" name="fileName"
                                                                data-show-preview="false" data-show-caption="true"
                                                                data-show-upload="false" data-toggle="tooltip"
                                                                data-placement="top" data-show-remove="false" />
@@ -98,7 +97,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <span th:if="${(listaDataset == null) or (listaDataset.size() == 0)}">Non sono presenti dataset per la sessione di lavoro.</span>
+                                        <span th:if="${(listaDataset == null) or (listaDataset.size() == 0)}" th:text="#{dictionary.empty.list}">Non sono presenti dizionari</span>
                                     </div>
                                 </div>
                             </div>
@@ -107,21 +106,21 @@
                                     <div class="card-header">
                                         <span th:text="#{Layout.log.panel}">Log panel</span>
                                         <div class="card-header-actions">
-                                            <a class="card-header-action" href="javascript:void(0)" 
+                                            <!--a class="card-header-action" href="javascript:void(0)" 
                                                th:onclick="'javascript:clearLog(\'' + ${session.sessionelv.id} + '\')'" title="Clear log">
                                                 <i class="fa fa-trash-o"></i>
-                                            </a>
+                                            </a-->
                                         </div>
                                     </div>
                                     <div id="logbox" class="card-body">
-                                        <ul th:if="${logs}">
+                                        <!--ul th:if="${logs}">
                                             <li th:each="log : ${logs}">
                                                 <span th:text="${#dates.format(log.msgTime, 'dd/MM/yyyy HH:mm')}"></span>&nbsp;&ndash;&nbsp;<span th:text="${log.msg}"></span>
                                             </li>
-                                        </ul>
-                                        <span th:unless="${logs}">
+                                        </ul-->
+                                        <!--span th:unless="${logs}">
                                             No message available
-                                        </span>
+                                        </span-->
                                     </div>
                                 </div>
                             </div>
@@ -130,6 +129,10 @@
                     </div>
                 </div>
             </section>
+            <!-- END MAIN CONTAINER -->
+            <footer th:replace="layout :: site-footer" />
+        </div>
+        <!-- wrapper --> 
             <!-- Bootstrap modal -->
             <div class="modal fade" id="errorUplodFile" role="dialog">
                 <div class="modal-dialog modal-sm" role="document">
@@ -195,28 +198,7 @@
 
                         <div class="modal-body">
                             <textarea class="form-control rounded-0" id="PreviewTextarea" rows="10"></textarea>
-                        </div>
-                        <div class="modal-body">
-                            <span th:text="#{file.logical.name}" >Etichetta:</span> &nbsp;&nbsp;&nbsp; 
-                            <input id="label_file" value="" type="text"/>                                
-                        </div>
-                        <div class="modal-body">
-                            <span th:text="#{file.data.type}">Tipo dato:</span> &nbsp;&nbsp;&nbsp;
-                            <select id="tipo_dato" >
-                                <option th:each="tipod : ${listaTipoDato}"
-                                        th:value="${tipod.id}"
-                                        th:text="${tipod.nome}">
-                                </option>
-                            </select>                              
-                        </div>
-                        <div class="modal-body">
-                            <span th:text="#{delimiter.file.legend}">Separatore:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <select id="delimiter_sel">
-                                <option value=','>,</option>
-                                <option value=';'>;</option>
-                                <option value='0'>tab</option>
-                            </select>
-                        </div>
+                        </div>                        
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                 <span th:text="#{Layout.Close}">Annulla</span>
@@ -227,11 +209,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- END MAIN CONTAINER -->
-            <footer th:replace="layout :: site-footer" />
-        </div>
-        <!-- wrapper -->        
+            </div>               
     </body>
 </html>
 
