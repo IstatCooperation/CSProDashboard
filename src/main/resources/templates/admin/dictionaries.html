@@ -27,7 +27,7 @@
                     </nav>
 
                     <div class="container-fluid">
-                        <input id="idsessionelv" type="hidden" value="${session.sessionelv.id}" />
+                        <!--input id="idsessionelv" type="hidden" value="${session.sessionelv.id}" /-->
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="card">
@@ -37,7 +37,7 @@
                                     <div class="card-body">
                                         <form id="inputFileForm" th:action="@{'/loadInputData'}" method="post" enctype="multipart/form-data">
                                             <input type="hidden" value="" name="descrizione" id="desc" /> 
-                                            <input type="hidden" th:value="${session.sessionelv.id}" th:name="idsessione" />
+                                            <!--input type="hidden" th:value="${session.sessionelv.id}" th:name="idsessione" /-->
                                             <input type="hidden" value="" name="delimiter" id="delimiter" />
                                             <input type="hidden" value="" name="labelFile" id="label_f" />
                                             <input type="hidden" value="" name="tipoDato" id="tipo_dat" />

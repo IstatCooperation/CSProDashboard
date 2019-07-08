@@ -1,7 +1,7 @@
 
 $(function () {
     setMenuActive("cspro2sql-dictionaries");
-    $.getJSON(ctx + "/rest/admin/list/errors", function (json) {
+    /*$.getJSON(ctx + "/rest/admin/list/errors", function (json) {
         var data = [];
         for (var i in json) {
             var a = [];
@@ -16,8 +16,10 @@ $(function () {
         name.push('Error');
         name.push('Date');
         name.push('Questionnaire');
+        //console.log(name);
+        //console.log(data);
         populate(data, name);
-    });
+    });*/
 });
 
 function populate(dataSet, name) {
