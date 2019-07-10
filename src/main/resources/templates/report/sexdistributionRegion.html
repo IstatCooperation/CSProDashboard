@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head th:replace="layout :: site-head"/>
     <head>
         <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
         <script th:src="@{/js/table/datatables.js}"></script>
         <script th:src="@{/js/chart/chart.bundle.min.js}"></script>
-        <script th:src="@{/js/chart/dashboardChart.js}"></script>
         <script th:src="@{/js/report/regions.js}"></script>
         <script th:src="@{/js/report/sexdistributionRegionList.js}"></script>
     </head>
