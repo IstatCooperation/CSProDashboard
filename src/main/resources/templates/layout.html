@@ -29,6 +29,13 @@
                             CSPro Dashboard 
                             <span class="toggle-menu" onclick="toggleMenu()"><i id="toggle-menu" class="fa fa-bars"></i></span>
                         </div>
+                        <ul class="nav navbar-nav navbar-style">
+                            <li class="nav-body" sec:authorize="hasRole('ADMIN')">
+                                <a th:href="@{/users/userlist}" title="Administration">
+                                    <span>User management</span>
+                                </a>
+                            </li>
+                        </ul>
                         <div class="nav pull-right small-screen">
                             <div class="btn-group btn-group-xs">
                                 <a sec:authorize="isAuthenticated()" href="#" th:href="@{/users/logout}" class="btn navbar-btn">
@@ -191,12 +198,6 @@
                                             </a>
                                         </li>                                        
                                     </ul>                                    
-                                </li>
-                                <li class="nav-body" sec:authorize="hasRole('ADMIN')">
-                                    <a th:href="@{/users/userlist}" title="Administration">
-                                        <i class="fa fa-briefcase"></i>
-                                        <span>Administration</span>
-                                    </a>
                                 </li>
                             </ul>
                         </nav>

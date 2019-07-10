@@ -10,6 +10,16 @@ body, html {
     overflow-y: visible;
 }
 
+.btn-light{
+    background-color: #f6f8fa;
+    border-color: #ddd;
+    color:#155873;
+}
+.btn-light:hover{
+    background-color: #e9e9e9;
+    color:#155873;
+}
+
 /* login */
 
 #login-panel .panel-heading, #login-panel .btn-primary{
@@ -226,6 +236,8 @@ aside.toggle-off .active {
     color: #196889;
     padding-left: 40px;
     padding-top: 3px;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
 
 .nav > li > a:hover{
@@ -238,6 +250,11 @@ aside.toggle-off .active {
     background-color: #fafbfc;
     text-decoration: none;
 }
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+    color: #fff;
+}
+
 
 .active{
     color:#02171f;

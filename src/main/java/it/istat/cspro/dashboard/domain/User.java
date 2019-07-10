@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
  * @author Istat Cooperation Unit
  */
 @Entity
-@Table(name = "c_user")
+@Table(name = "dashboard_user")
 @DynamicUpdate
 public class User implements Serializable {
 
