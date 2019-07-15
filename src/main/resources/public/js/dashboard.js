@@ -96,3 +96,36 @@ function showModalInfo(title, content) {
     $('#modalInfo .modal-body').text(content);
     $('#modalInfo').modal('show'); // show bootstrap modal
 }
+
+function renderTable(idTable, filters) {
+
+    var tFoot = $(document.createElement('tfoot'));
+    var footTr = $(document.createElement('tr'));
+    $('#' + idTable).append(tFoot.append(footTr));
+    for (i = 0; i < $('#' + idTable + " > tbody > tr:first > td").length; i++) {
+        footTr.append($(document.createElement('th')));
+    }
+
+    var table = $('#' + idTable).DataTable({
+        responsive: true,
+        lengthChange: false,
+        pageLength: 15,
+        order: [[0, "asc"]],
+        buttons: ['csv', 'excel', 'pdf'],
+        initComplete: function () {
+            this.api().columns(filters).every(function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                            column.search(val ? '^' + val + '$' : '', true, false).draw();
+                        });
+                column.data().unique().sort().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>');
+                });
+            });
+        }
+    });
+    table.buttons().container().appendTo('#' + idTable + '_wrapper .col-sm-6:eq(0)');
+}

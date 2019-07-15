@@ -1,5 +1,6 @@
 package it.istat.cspro.dashboard.domain;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "DASHBOARD_META_UNIT")
-public class DashboardUnit {
+public class DashboardUnit implements Serializable {
     
      private static final long serialVersionUID = 0x5ae011eea5ebf5e6L;
 
