@@ -1,4 +1,4 @@
 $(function () {
     setMenuActive("cspro2sql-metadata");
-    renderTable("metadataTable", [5,6]);
+    renderTable("metadataTable", [4,5]);
 });

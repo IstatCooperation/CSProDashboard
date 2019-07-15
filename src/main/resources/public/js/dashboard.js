@@ -105,7 +105,7 @@ function renderTable(idTable, filters) {
     for (i = 0; i < $('#' + idTable + " > tbody > tr:first > td").length; i++) {
         footTr.append($(document.createElement('th')));
     }
-
+    
     var table = $('#' + idTable).DataTable({
         responsive: true,
         lengthChange: false,
