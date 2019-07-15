@@ -20,6 +20,11 @@ body, html {
     color:#155873;
 }
 
+.row {
+    /* margin-left: -10px; */
+    margin-right: -10px;
+}
+
 /* login */
 
 #login-panel .panel-heading, #login-panel .btn-primary{
@@ -177,7 +182,7 @@ body, html {
     height: 100%;
     padding-bottom: 20px;
     overflow-y: auto;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid #c8ced3;
     background-color: #fafbfc;
 }
 .sidebar-title {
@@ -261,7 +266,7 @@ aside.toggle-off .active {
     font-weight: 500;
 }
 
-#Home{
+#home{
     padding-bottom: 8px;
 }
 
@@ -291,7 +296,7 @@ aside.toggle-off .active {
     color: #333;
     font-weight: 400;
     background-color: #fafbfc;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #c8ced3;
 }
 .content-wrapper>.content-heading>small, .content-wrapper>h3>small {
     display: block;
@@ -333,6 +338,7 @@ aside.toggle-off .active {
 }
 .widget.panel, .widget .panel {
     overflow: hidden;
+    margin-top: 25px;
 }
 .row-table {
     display: table;
@@ -534,4 +540,186 @@ fieldset {
     border: 1px solid #dddddd;
     border-radius: 3px;
     background-color: white;
+}
+
+/* Card */
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #c8ced3;
+    border-radius: .25rem;
+    margin-top: 10px;
+}
+
+.card>hr {
+    margin-right: 0;
+    margin-left: 0
+}
+
+.card>.list-group:first-child .list-group-item:first-child {
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem
+}
+
+.card>.list-group:last-child .list-group-item:last-child {
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+.card-title {
+    margin-bottom: .75rem
+}
+
+.card-subtitle {
+    margin-top: -.375rem;
+    margin-bottom: 0
+}
+
+.card-text:last-child {
+    margin-bottom: 0
+}
+
+.card-link:hover {
+    text-decoration: none
+}
+
+.card-link+.card-link {
+    margin-left: 1.25rem
+}
+
+.card-header {
+    padding: 1rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #c8ced3;
+    font-weight: 600;
+}
+
+.card-header:first-child {
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0
+}
+
+.card-header+.list-group .list-group-item:first-child {
+    border-top: 0
+}
+
+.card-footer {
+    padding: .75rem 1.25rem;
+    background-color: #fff;
+    border-top: 1px solid #c8ced3 !important;
+}
+
+.card-footer:last-child {
+    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px)
+}
+
+.card-header-tabs {
+    margin-right: -.625rem;
+    margin-bottom: -.75rem;
+    margin-left: -.625rem;
+    border-bottom: 0
+}
+
+.card-header-pills {
+    margin-right: -.625rem;
+    margin-left: -.625rem
+}
+
+.card-header-actions {
+    display: inline-block;
+    float: right;
+    font-weight: normal;
+}
+
+.card-header-actions a:hover,.card-header-actions a:focus{
+    text-decoration: none;
+} 
+
+.card-header a:hover,.card-header a:focus{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card-header-action {
+    padding-left: 5px;
+    padding-right: 5px
+}
+
+
+.card-header-action .bar-right{
+    padding-left: 0px!important;
+    padding-right: 10px!important;
+    border-right: 1px solid #ccc;
+}
+
+.card-header-action-border {
+    padding-right: 5px;
+    padding-left: 5px;
+    border-right: 1px solid #c8ced3;
+}
+
+.card-img-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1.25rem
+}
+
+.card-img {
+    width: 100%;
+    border-radius: calc(0.25rem - 1px)
+}
+
+.card-img-top {
+    width: 100%;
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px)
+}
+
+.card-img-bottom {
+    width: 100%;
+    border-bottom-right-radius: calc(0.25rem - 1px);
+    border-bottom-left-radius: calc(0.25rem - 1px)
+}
+
+.card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+
+.card-danger{
+    border-color: #f86c6b!important;
+}
+
+.well-app {
+    font-size: 16px;
+    margin-top: 20px !important;
+    background-color: #fff !important;
+    color: #155873 !important;
+    padding: 15px;
+    border:1px solid #c8ced3;
+}
+
+#error-panel{
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 14px;
+    padding-left: 10px;
 }

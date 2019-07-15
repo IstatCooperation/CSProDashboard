@@ -11,8 +11,12 @@ $(function () {
 
 //Set menu active
 function setMenuActive(id) {
-    var navMenu = $("#" + id + " a").addClass('active').parent().parent().addClass('in').parent();
-    navMenu.children("a").addClass('active');
+    if ($("#" + id).is('a')) {
+        $("#" + id).addClass('active');
+    } else {
+        var navMenu = $("#" + id + " a").addClass('active').parent().parent().addClass('in').parent();
+        navMenu.children("a").addClass('active');
+    }
 }
 
 function toggleMenu(load) {
@@ -87,7 +91,7 @@ $.getJSON = function (a, b) {
     });
 };
 
-function showModalInfo(title, content){
+function showModalInfo(title, content) {
     $('#modalInfo .modal-title').text(title);
     $('#modalInfo .modal-body').text(content);
     $('#modalInfo').modal('show'); // show bootstrap modal

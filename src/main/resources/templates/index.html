@@ -25,29 +25,34 @@
                             <li>Home</li>
                         </ol>
                     </div>
-                    <!-- START PANEL-->
-                    <div class="bs-callout">
-                        <h4>Welcome to CSPro Dashboard</h4>
-                        <p style="margin-top: 15px">
-                            Choose a report <span sec:authentication="name">User</span>!  
-                        </p>
-                    </div>
-                    <!-- END PANEL-->
+
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-6 col-sm-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Male and female sex distribution chart
+                                
+                                <div class="well well-app" style="background-color: #fafbfc">
+                                    <p>
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                        <span>CSPro Dashboard</span>
+                                    </p>
+                                    <p style="padding-left: 8px;">
+                                        <span>Welcome</span>
+                                        <strong><span sec:authentication="principal.firstname"></span></strong>
+                                    </p>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span>Sex distribution</span>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <canvas id="bar-chart-area" />
                                     </div>
                                 </div>
                             </div>
-                        
-                            <!-- START WIDGET -->
-                            <div class="col-lg-3 col-sm-6">
+                            <div class="col-lg-3 col-sm-12">
                                 <div class="panel widget bg-blue">
                                     <div class="row row-table">
                                         <div class="col-xs-4 text-center bg-blue-dark ">
@@ -59,7 +64,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" th:if="${dashboardInfo.listing}">
                                     <div class="panel-body text-center">
                                         <div class="text-info">Field Work / Freshlist</div>
                                         <canvas class="fieldworkFreshlist"></canvas>
@@ -80,6 +85,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>

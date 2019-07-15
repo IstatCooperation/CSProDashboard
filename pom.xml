@@ -75,15 +75,14 @@
             <artifactId>spring-boot-starter-log4j</artifactId>
             <version>1.2.8.RELEASE</version> 
         </dependency> 
-        <!--dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
         <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.11</version>
+                <version>8.0.16</version>
         </dependency>        
     </dependencies>
 

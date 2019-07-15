@@ -1,5 +1,4 @@
 $(function () {
-    setMenuActive("report-total-household");
     $.getJSON(ctx + "/rest/report/total", function (report) {
         $('#householdFieldwork').text(format(report[0][4]));
         $('#householdFreshlist').text(format(report[0][5]));

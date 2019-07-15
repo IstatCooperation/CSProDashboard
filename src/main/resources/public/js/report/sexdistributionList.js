@@ -5,7 +5,6 @@ var arrDataFemale = [];
 var arrColor = [];
 
 $(document).ready(function () {
-    setMenuActive("report-sexdistribution");
     var jqxhr = $.getJSON(_ctx + "/rest/report/sexByAgeGroup", function (json) {
         $.each(json, function (i, obj) {
             arrLabel.push(obj[1]);
@@ -23,7 +22,7 @@ $(document).ready(function () {
                 datasets: [
                     {
                         data: arrDataMale,
-                        backgroundColor: '#196889',
+                        backgroundColor: '#034f84',
                         label: 'Male'
                     }, {
                         data: arrDataFemale,

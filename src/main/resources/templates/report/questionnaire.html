@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head th:replace="layout :: site-head"/>
     <head>
         <script th:src="@{/js/chart/jquery.classyloader.min.js}"></script>
-        <script th:src="@{/js/report/regions.js}"></script>
+        <!--script th:src="@{/js/report/regions.js}"></script-->
         <script th:src="@{/js/report/questionnaire.js}"></script>
     </head>
 
@@ -24,50 +24,50 @@
                     </div>
                     <div class="container-fluid">
                         <div id="template">
-                            <div>
-                                <h4 class="regionName">Country</h4>
-                                <div class="row">
-                                    <!-- START WIDGET -->
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="panel widget bg-blue">
-                                            <div class="row row-table">
-                                                <div class="col-xs-4 text-center bg-blue-dark ">
-                                                    <em class="fa fa-file-text-o fa-3x"></em>
-                                                </div>
-                                                <div class="col-xs-8 widget-content">
-                                                    <div class="h2 mt0" id="questionnaireCount1"></div>
-                                                    <div class="text-uppercase">Total Households</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- END WIDGET -->
-
-                                    <!-- START WIDGET -->
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="panel widget bg-blue">
-                                            <div class="row row-table">
-                                                <div class="col-xs-4 text-center bg-blue-dark pv-lg">
-                                                    <em class="fa fa-child fa-3x"></em>
-                                                </div>
-                                                <div class="col-xs-8 widget-content">
-                                                    <div class="h2 mt0" id="questionnaireCount2"></div>
-                                                    <div class="text-uppercase">Avg Household Size</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- END WIDGET -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <span>Country</span>
                                 </div>
-
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <!-- START WIDGET -->
+                                        <div class="col-lg-3 col-sm-6">
+                                            <div class="panel widget bg-blue">
+                                                <div class="row row-table">
+                                                    <div class="col-xs-4 text-center bg-blue-dark ">
+                                                        <em class="fa fa-file-text-o fa-3x"></em>
+                                                    </div>
+                                                    <div class="col-xs-8 widget-content">
+                                                        <div class="h2 mt0" id="questionnaireCount1"></div>
+                                                        <div class="text-uppercase">Total Households</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END WIDGET -->
+                                        <!-- START WIDGET -->
+                                        <div class="col-lg-3 col-sm-6">
+                                            <div class="panel widget bg-blue">
+                                                <div class="row row-table">
+                                                    <div class="col-xs-4 text-center bg-blue-dark pv-lg">
+                                                        <em class="fa fa-child fa-3x"></em>
+                                                    </div>
+                                                    <div class="col-xs-8 widget-content">
+                                                        <div class="h2 mt0" id="questionnaireCount2"></div>
+                                                        <div class="text-uppercase">Avg Household Size</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END WIDGET -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
             <footer th:replace="layout :: site-footer" />
         </div>
     </body>
-
 </html>
 

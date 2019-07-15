@@ -5,6 +5,11 @@
     <head>
         <script th:src="@{/js/chart/jquery.classyloader.min.js}" type="text/javascript"></script>
         <script th:src="@{/js/report/totalHousehold.js}" type="text/javascript"></script>
+        <script>
+            $(function () {
+                setMenuActive("report-total-household");
+            });
+        </script>
     </head>
 
     <body>
