@@ -36,11 +36,12 @@ public class DashboardVariable implements Serializable {
     @Column(name = "VAR_ORDER")
     private Integer order;
 
-    @Column(name = "UNIT_ID")
-    private Integer unitId;
-    
     @ManyToOne
     @JoinColumn(name = "CONCEPT_ID")
     private DashboardConcept concept;
+    
+    @ManyToOne
+    @JoinColumn(name = "UNIT_ID")
+    private DashboardUnit unit;
     
 }

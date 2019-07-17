@@ -15,10 +15,10 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "DASHBOARD_META_UNIT")
-public class DashboardUnit implements Serializable {
-    
-     private static final long serialVersionUID = 0x5ae011eea5ebf5e6L;
+@Table(name = "DASHBOARD_REPORT")
+public class DashboardReport implements Serializable {
+
+    private static final long serialVersionUID = -2418767339520755476L;
 
     @Id
     @Column(name = "ID")
@@ -27,14 +27,17 @@ public class DashboardUnit implements Serializable {
     @Column(name = "NAME", length = 100)
     private String name;
 
-    @Column(name = "NOTE", length = 1000)
-    private String note;
+    @Column(name = "DESCRIPTION", length = 1000)
+    private String description;
+
+    @Column(name = "LIST_ORDER")
+    private int order;
+
+    @Column(name = "IS_VISIBLE")
+    private int isVisible;
 
     @ManyToOne
-    @JoinColumn(name = "PARENT_ID")
-    private DashboardUnit parent;
+    @JoinColumn(name = "REPORT_TYPE")
+    private DashboardReportType type;
 
-    @ManyToOne
-    @JoinColumn(name = "CONCEPT_ID")
-    private DashboardConcept concept;
 }

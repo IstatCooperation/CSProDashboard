@@ -32,7 +32,12 @@
                         <ul class="nav navbar-nav navbar-style">
                             <li class="nav-body" sec:authorize="hasRole('ADMIN')">
                                 <a th:href="@{/users/userlist}" title="Administration">
-                                    <span>User management</span>
+                                    <span>Users</span>
+                                </a>
+                            </li>
+                            <li class="nav-body" sec:authorize="hasRole('ADMIN')">
+                                <a th:href="@{/admin/settings}" title="Administration">
+                                    <span>Settings</span>
                                 </a>
                             </li>
                         </ul>
@@ -95,7 +100,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-body" sec:authorize="hasRole('ADMIN') || hasRole('PROGRESS')">
-                                    <a href="#process" title="Process Report" data-toggle="collapse" class="collapsed" aria-expanded="false">
+                                    <a th:href="@{/#process}" title="Process Report" data-toggle="collapse" class="collapsed" aria-expanded="false">
                                         <i class="fa fa-cogs"></i>
                                         <span>Progress Report</span>
                                     </a>
@@ -116,14 +121,11 @@
                                     </ul>
                                 </li>
                                 <li class="nav-body" sec:authorize="hasRole('ADMIN') || hasRole('ANALYST')">
-                                    <a href="#data"
-                                       title="Analysis Report" data-toggle="collapse" class="collapsed"
-                                       aria-expanded="false">
+                                    <a th:href="@{/#analysis}" title="Analysis Report" data-toggle="collapse" class="collapsed" aria-expanded="false">
                                         <i class="fa fa-file-text-o"></i>
                                         <span>Analysis Report</span>
                                     </a>
-                                    <ul id="data" class="nav sidebar-subnav collapse"
-                                        aria-expanded="false">
+                                    <ul id="analysis" class="nav sidebar-subnav collapse" aria-expanded="false">
                                         <li id="report-population" th:if="${reports.contains('r_individual_info')}">
                                             <a title="Population" th:href="@{/report/population}">
                                                 <span>Population</span>
@@ -136,7 +138,7 @@
                                         </li>
                                         <li id="report-sexdistribution" th:if="${reports.contains('r_sex_by_age_group')}">
                                             <a title="Sex Distribution" th:href="@{/report/sexdistribution}">
-                                                <span>Sex Distribution by Country</span>
+                                                <span>Sex Distribution</span>
                                             </a>
                                         </li>
                                         <!--li id="report-sexdistributionRegion" th:if="${reports.contains('r_sex_by_age_group_region')}">
@@ -157,13 +159,18 @@
                                         <i class="fa fa-map-marker"></i>
                                         <span>GIS maps</span>
                                     </a>
-                                    <!--ul id="gis" class="nav sidebar-subnav collapse" aria-expanded="false">
-                                        <li id="maps-by-region">
-                                            <a title="Maps by Region" th:href="@{/gis/region}">
-                                                <span>Maps by Region</span>
+                                    <ul id="gis" class="nav sidebar-subnav collapse" aria-expanded="false">
+                                        <li id="territory">
+                                            <a title="Territory" th:href="@{/gis/territory}">
+                                                <span>Territory</span>
                                             </a>
                                         </li>
-                                    </ul-->
+                                        <li id="maps-by-region">
+                                            <a title="Maps by Region" th:href="@{/gis/region}">
+                                                <span>Maps</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
 
                                 <li class="nav-body" sec:authorize="hasRole('ADMIN')">

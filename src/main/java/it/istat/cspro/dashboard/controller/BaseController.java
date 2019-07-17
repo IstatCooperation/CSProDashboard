@@ -1,6 +1,6 @@
 package it.istat.cspro.dashboard.controller;
 
-import it.istat.cspro.dashboard.domain.CSPro2SqlReport;
+import it.istat.cspro.dashboard.domain.DashboardReport;
 import it.istat.cspro.dashboard.domain.DashboardInfo;
 import it.istat.cspro.dashboard.service.DashboardService;
 import java.util.HashSet;
@@ -26,7 +26,7 @@ public class BaseController {
     @ModelAttribute("reports")
     public Set<String> getReports() {
         Set<String> reports = new HashSet<>();
-        for (CSPro2SqlReport r : service.getReports()) {
+        for (DashboardReport r : service.getReports()) {
             reports.add(r.getName());
         }
         return reports;
@@ -35,7 +35,7 @@ public class BaseController {
     @ModelAttribute("householdReports")
     public List<String> getHouseholdReports() {
         List<String> reports = new LinkedList<>();
-        for (CSPro2SqlReport r : service.getReports()) {
+        for (DashboardReport r : service.getReports()) {
             Matcher m = HOUSEHOLD_BY_PATTERN.matcher(r.getName());
             if (m.find()) {
                 reports.add(m.group(1));

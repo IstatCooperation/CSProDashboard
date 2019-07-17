@@ -708,6 +708,33 @@ fieldset {
     border-color: #f86c6b!important;
 }
 
+.header-tag{
+    font-weight: normal;
+    border-right: 1px solid #c8ced3!important;
+    padding-right: 7px;
+    padding-left: 10px;
+}
+
+.header-tag-first{
+    font-weight: normal;
+    border-right: 1px solid #c8ced3!important;
+    padding-right: 7px;
+}
+
+.header-tag-last{
+    font-weight: normal;
+    padding-left: 7px;
+}
+
+.header-tag-first:hover, .header-tag:hover, .header-tag-last:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.header-strong{
+    font-weight: bold !important;
+}
+
 .well-app {
     font-size: 16px;
     margin-top: 20px !important;

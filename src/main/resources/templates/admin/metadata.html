@@ -25,10 +25,18 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <span>Variables</span>
+                                        <span id="header-variable" class="header-tag-first" onclick="javascript:showPanel('variable');" title="Concepts"> 
+                                            <span class="header-strong">Variables</span>
+                                        </span>
+                                        <span id="header-unit" class="header-tag" onclick="javascript:showPanel('unit');" title="Units"> 
+                                            <span>Units</span>
+                                        </span>
+                                        <span id="header-concept" class="header-tag-last" onclick="javascript:showPanel('concept');" title="Concepts"> 
+                                            <span>Concepts</span>
+                                        </span>
                                     </div>
                                     <div class="card-body">
-                                        <table id="metadataTable" class="table table-condensed" th:if="${variables}" cellspacing="0">
+                                        <table id="table-variable" class="table table-condensed table-striped" th:if="${variables}" cellspacing="0">
                                             <thead>
                                                 <tr th:unless="${(variables == null) or (variables.size() == 0) }">
                                                     <th><span>Id</span></th>
@@ -47,16 +55,50 @@
                                                     <!--td th:text="${variable.note}"></td-->
                                                     <td th:text="${variable.type}"></td>
                                                     <td th:text="${variable.order}"></td>
-                                                    <td th:text="${variable.unitId}"></td>
+                                                    <td th:text="${variable.unit.name}"></td>
                                                     <td th:if="${variable.concept == null}"> - </td>
                                                     <td th:unless="${variable.concept == null}" th:text="${variable.concept.name}"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
-
-
-
-
+                                        <table id="table-unit" class="table table-condensed table-striped" th:if="${units}" cellspacing="0">
+                                            <thead>
+                                                <tr th:unless="${(units == null) or (units.size() == 0) }">
+                                                    <th><span>Id</span></th>
+                                                    <th><span>Name</span></th>
+                                                    <th><span>Note</span></th>
+                                                    <th><span>Parent</span></th>
+                                                    <th><span>Concept</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="unit : ${units}" th:unless="${(units == null) or (units.size() == 0) }">
+                                                    <td th:text="${unit.id}"></td>
+                                                    <td th:text="${unit.name}"></td>
+                                                    <td th:text="${unit.note}"></td>
+                                                    <td th:if="${unit.parent == null}"> - </td>
+                                                    <td th:unless="${unit.parent == null}" th:text="${unit.parent.name}"></td>
+                                                    <td th:if="${unit.concept == null}"> - </td>
+                                                    <td th:unless="${unit.concept == null}" th:text="${unit.concept.name}"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                                      
+                                        <table id="table-concept" class="table table-condensed table-striped" th:if="${concepts}" cellspacing="0">
+                                            <thead>
+                                                <tr th:unless="${(concepts == null) or (concepts.size() == 0) }">
+                                                    <th><span>Id</span></th>
+                                                    <th><span>Name</span></th>
+                                                    <th><span>Note</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="concept : ${concepts}" th:unless="${(concepts == null) or (concepts.size() == 0) }">
+                                                    <td th:text="${concept.id}"></td>
+                                                    <td th:text="${concept.name}"></td>
+                                                    <td th:text="${concept.note}"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

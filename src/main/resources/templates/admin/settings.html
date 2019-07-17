@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="layout :: site-head"/>
+    <head>
+        <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
+        <script th:src="@{/js/table/datatables.js}"></script>
+        <script th:src="@{/js/admin/settings.js}"></script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header th:replace="layout :: site-header" />
+            <aside th:replace="layout :: site-aside" />
+            <section>
+                <div class="content-wrapper">
+                    <div class="content-heading">
+                        <ol class="breadcrumb">
+                            <li>Dashboard </li>
+                            <li>Settings</li>
+                        </ol>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span id="header-progress" class="header-tag-first" onclick="javascript:showPanel('progress');" title="Concepts"> 
+                                            <span class="header-strong">Progress</span>
+                                        </span>
+                                        <span id="header-analysis" class="header-tag" onclick="javascript:showPanel('analysis');" title="Units"> 
+                                            <span>Analysis</span>
+                                        </span>
+                                        <span id="header-gis" class="header-tag-last" onclick="javascript:showPanel('gis');" title="Concepts"> 
+                                            <span>GIS</span>
+                                        </span>
+                                        
+                                        
+                                        <div class="card-header-actions">
+                                            <a class="card-header-action" href="javascript:void(0)" onclick="javascript:save();" title="Save reports"> 
+                                                <i class="fa fa-floppy-o"></i>
+                                                <span>Save</span>
+                                            </a>
+                                        </div>
+                                        
+                                        
+                                        
+                                        
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="table-progress" class="table table-condensed table-striped" th:if="${dashBoardreports}" cellspacing="0">
+                                            <thead>
+                                                <tr th:unless="${(dashBoardreports == null) or (dashBoardreports.size() == 0) }">
+                                                    <th><span>Id</span></th>
+                                                    <th><span>Name</span></th>
+                                                    <th><span>Order</span></th>
+                                                    <th><span>Visible</span></th>
+                                                    <th><span>Type</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="report : ${dashBoardreports}" th:unless="${(dashBoardreports == null) or (dashBoardreports.size() == 0) }" th:class="cls_ + ${report.type.name}">
+                                                    <td th:text="${report.id}"></td>
+                                                    <td th:text="${report.name}"></td>
+                                                    <td th:text="${report.order}"></td>
+                                                    <td th:text="${report.isVisible}"></td>
+                                                    <td th:text="${report.type.name}"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer th:replace="layout :: site-footer" />
+        </div>
+    </body>
+</html>

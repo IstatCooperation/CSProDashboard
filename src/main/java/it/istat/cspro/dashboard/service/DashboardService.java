@@ -5,13 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import it.istat.cspro.dashboard.dao.CSPro2SqlReportDao;
+import it.istat.cspro.dashboard.dao.DashboardConceptDao;
 import it.istat.cspro.dashboard.dao.DashboardInfoDao;
+import it.istat.cspro.dashboard.dao.DashboardUnitDao;
 import it.istat.cspro.dashboard.dao.DashboardVariableDao;
 import it.istat.cspro.dashboard.domain.CSPro2SqlError;
-import it.istat.cspro.dashboard.domain.CSPro2SqlReport;
+import it.istat.cspro.dashboard.domain.DashboardReport;
+import it.istat.cspro.dashboard.domain.DashboardConcept;
 import it.istat.cspro.dashboard.domain.DashboardInfo;
+import it.istat.cspro.dashboard.domain.DashboardUnit;
 import it.istat.cspro.dashboard.domain.DashboardVariable;
+import it.istat.cspro.dashboard.dao.DashboardReportDao;
 
 /**
  *
@@ -22,16 +26,21 @@ import it.istat.cspro.dashboard.domain.DashboardVariable;
 public class DashboardService {
 
     @Autowired
-    private CSPro2SqlReportDao cSPro2SqlReportDao;
+    private DashboardReportDao dashboardReportDao;
     @Autowired
     private CSPro2SqlErrorDao cSPro2SqlErrorDao;
     @Autowired
     private DashboardInfoDao dashboardInfoDao;
     @Autowired
     private DashboardVariableDao dashboardVariableDao;
+    @Autowired
+    private DashboardUnitDao dashboardUnitDao;
+    @Autowired
+    private DashboardConceptDao dashboardConceptDao;
 
-    public List<CSPro2SqlReport> getReports() {
-        return cSPro2SqlReportDao.findAllByOrderByListOrderAsc();
+
+    public List<DashboardReport> getReports() {
+        return dashboardReportDao.findAll();
     }
 
     public List<CSPro2SqlError> getErrors() {
@@ -41,9 +50,17 @@ public class DashboardService {
     public DashboardInfo getDashboardInfo() {
         return dashboardInfoDao.findById(0).orElse(null);
     }
-    
-    public List<DashboardVariable> getVariables(){
+
+    public List<DashboardVariable> getVariables() {
         return dashboardVariableDao.findAll();
     }
 
+    public List<DashboardUnit> getUnits() {
+        return dashboardUnitDao.findAll();
+    }
+    
+    public List<DashboardConcept> getConcepts() {
+        return dashboardConceptDao.findAll();
+    }
+    
 }
