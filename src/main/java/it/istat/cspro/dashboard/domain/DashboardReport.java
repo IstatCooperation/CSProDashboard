@@ -29,6 +29,9 @@ public class DashboardReport implements Serializable {
 
     @Column(name = "DESCRIPTION", length = 1000)
     private String description;
+    
+    @Column(name = "REPORT_VIEW", length = 1000)
+    private String tableName;
 
     @Column(name = "LIST_ORDER")
     private int order;

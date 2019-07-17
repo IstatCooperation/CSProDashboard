@@ -113,6 +113,7 @@ function renderTable(idTable, filters) {
     
     var table = $('#' + idTable).DataTable({
         responsive: true,
+        autowidth: false,
         lengthChange: false,
         pageLength: 15,
         order: [[0, "asc"]],

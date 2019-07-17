@@ -27,7 +27,7 @@ public class BaseController {
     public Set<String> getReports() {
         Set<String> reports = new HashSet<>();
         for (DashboardReport r : service.getReports()) {
-            reports.add(r.getName());
+            reports.add(r.getTableName());
         }
         return reports;
     }
@@ -36,7 +36,7 @@ public class BaseController {
     public List<String> getHouseholdReports() {
         List<String> reports = new LinkedList<>();
         for (DashboardReport r : service.getReports()) {
-            Matcher m = HOUSEHOLD_BY_PATTERN.matcher(r.getName());
+            Matcher m = HOUSEHOLD_BY_PATTERN.matcher(r.getTableName());
             if (m.find()) {
                 reports.add(m.group(1));
             }
