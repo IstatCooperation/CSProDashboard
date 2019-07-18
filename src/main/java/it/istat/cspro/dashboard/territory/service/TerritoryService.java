@@ -19,11 +19,11 @@ public class TerritoryService {
     private TerritoryDao territoryDao;
    
 
-    public HashMap<String, String> getTerritoryfilter(Integer[] codes) {
+    public List<Object[]> getTerritoryfilter(Integer[] codes) {
         return territoryDao.getTerritoryFilter(codes);
     }
 
-    public HashMap<String, String> getTerritory(Integer[] codes) {
-        return territoryDao.getTerritoryFilter(codes);
+    public List<Object[]> getTerritory(Integer[] codes) {
+        return territoryDao.getTerritory(codes);
     }
 }

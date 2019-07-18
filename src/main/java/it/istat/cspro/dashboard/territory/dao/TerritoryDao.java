@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.istat.cspro.dashboard.territory.dao;
 
 import it.istat.cspro.dashboard.dao.DashboardVariableDao;
 import it.istat.cspro.dashboard.domain.DashboardConcept;
 import it.istat.cspro.dashboard.domain.DashboardVariable;
-import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -31,80 +25,69 @@ public class TerritoryDao {
     @Autowired
     private EntityManager em;
 
-    public HashMap<String, String> getTerritoryFilter(Integer[] codes) {
-
-        HashMap<String, String> map = new HashMap();
+    public List<Object[]> getTerritoryFilter(Integer[] codes) {
 
         DashboardConcept territoryConcept = new DashboardConcept();
         territoryConcept.setId(TERRITORY_CONCEPT);
 
         List<DashboardVariable> hierarchy = dashboardVariableDao.findByConcept(territoryConcept);
 
-        String queryString = "";
-        String whereString = "WHERE ";
+        String queryString;
+        String whereCondition = "WHERE ";
 
         if (codes[0] == TERRITORY_ROOT) { //root level
-            queryString = "SELECT distinct " + hierarchy.get(0).getName() + "_NAME, " + hierarchy.get(0).getName() + " FROM dashboard_test.territory";
-        } else{
-            queryString = "SELECT distinct ";
-            for(int i = 0; i < codes.length; i++){
-                if(i == codes.length - 1){ //is last
-                    whereString += hierarchy.get(i).getName() + " = "+ codes[i] + ";"; 
-                } else{
-                    whereString += hierarchy.get(i).getName() + " = "+ codes[i] + " and "; 
+            queryString = "SELECT distinct " + hierarchy.get(0).getName() + "_NAME, " + hierarchy.get(0).getName() + " FROM territory";
+        } else {
+            for (int i = 0; i < codes.length; i++) {
+                whereCondition += hierarchy.get(i).getName() + " = " + codes[i];
+                if (i == codes.length - 1) { //is last
+                    whereCondition += ";";
+                } else {
+                    whereCondition += " and ";
                 }
             }
-            queryString = "SELECT distinct " + hierarchy.get(codes.length).getName() + ", " + hierarchy.get(codes.length).getName() + "_NAME FROM dashboard_test.territory " + whereString;
+            queryString = "SELECT distinct " + hierarchy.get(codes.length).getName() + "_NAME, " + 
+                    hierarchy.get(codes.length).getName() + " FROM territory " + whereCondition;
         }
-        
+
         Query query = em.createNativeQuery(queryString);
-
-        List<Object[]> territory = query.getResultList();
-
-        for (Object[] result : territory) {
-            map.put(result[0].toString(), result[1].toString());
-        }
-
-        return map;
+        
+        return query.getResultList();
 
     }
-    
-    
-     public HashMap<String, String> getTerritory(Integer[] codes) {
 
-        HashMap<String, String> map = new HashMap();
+    public List<Object[]> getTerritory(Integer[] codes) {
 
         DashboardConcept territoryConcept = new DashboardConcept();
         territoryConcept.setId(TERRITORY_CONCEPT);
 
         List<DashboardVariable> hierarchy = dashboardVariableDao.findByConcept(territoryConcept);
 
-        String queryString = "";
-        String whereString = "WHERE ";
+        String fields = "";
 
-        if (codes[0] == TERRITORY_ROOT) { //root level
-            queryString = "SELECT distinct " + hierarchy.get(0).getName() + "_NAME, " + hierarchy.get(0).getName() + " FROM dashboard_test.territory";
-        } else{
-            queryString = "SELECT distinct ";
-            for(int i = 0; i < codes.length; i++){
-                if(i == codes.length - 1){ //is last
-                    whereString += hierarchy.get(i).getName() + " = "+ codes[i] + ";"; 
-                } else{
-                    whereString += hierarchy.get(i).getName() + " = "+ codes[i] + " and "; 
+        for (DashboardVariable var : hierarchy) {
+            fields += var.getName() + "_NAME, " + var.getName() + ", ";
+        }
+
+        fields = fields.substring(0, fields.lastIndexOf(",")); //remove last comma
+
+        String queryString = "";
+        String whereCondition = "WHERE ";
+
+        if (codes[0] != TERRITORY_ROOT) {
+            for (int i = 0; i < codes.length; i++) {
+                if (i == codes.length - 1) { //is last
+                    whereCondition += hierarchy.get(i).getName() + " = " + codes[i] + ";";
+                } else {
+                    whereCondition += hierarchy.get(i).getName() + " = " + codes[i] + " and ";
                 }
             }
-            queryString = "SELECT distinct " + hierarchy.get(codes.length).getName() + ", " + hierarchy.get(codes.length).getName() + "_NAME FROM dashboard_test.territory " + whereString;
+            queryString = "SELECT " + fields + " FROM territory " + whereCondition;
         }
-        
+
         Query query = em.createNativeQuery(queryString);
 
-        List<Object[]> territory = query.getResultList();
-
-        for (Object[] result : territory) {
-            map.put(result[0].toString(), result[1].toString());
-        }
-
-        return map;
+        return query.getResultList();
 
     }
 

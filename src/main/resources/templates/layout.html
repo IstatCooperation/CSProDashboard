@@ -49,12 +49,12 @@
                         </div>
                         <ul class="nav navbar-nav navbar-style">
                             <li class="nav-body" sec:authorize="hasRole('ADMIN')">
-                                <a th:href="@{/users/userlist}" title="Administration">
+                                <a th:href="@{/users/userlist}" title="User management">
                                     <span>Users</span>
                                 </a>
                             </li>
                             <li class="nav-body" sec:authorize="hasRole('ADMIN')">
-                                <a th:href="@{/admin/settings}" title="Administration">
+                                <a th:href="@{/admin/settings}" title="Dashboard settings">
                                     <span>Settings</span>
                                 </a>
                             </li>
