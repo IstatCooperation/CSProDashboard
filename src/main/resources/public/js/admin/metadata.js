@@ -4,6 +4,7 @@ $(function () {
     renderTable("table-unit", [3,4]);
     renderTable("table-concept");
     showPanel('variable');
+    $(".card").show();//to prevent flickering
 });
 
 function showPanel(idPanel){

@@ -23,7 +23,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="card">
+                                <div class="card" style="display: none">
                                     <div class="card-header">
                                         <span id="header-variable" class="header-tag-first" onclick="javascript:showPanel('variable');" title="Concepts"> 
                                             <span class="header-strong">Variables</span>
@@ -36,7 +36,7 @@
                                         </span>
                                     </div>
                                     <div class="card-body">
-                                        <table id="table-variable" class="table table-condensed table-striped" th:if="${variables}" cellspacing="0">
+                                        <table id="table-variable" class="table table-condensed table-striped" th:if="${variables}" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr th:unless="${(variables == null) or (variables.size() == 0) }">
                                                     <th><span>Id</span></th>
@@ -61,7 +61,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <table id="table-unit" class="table table-condensed table-striped" th:if="${units}" cellspacing="0">
+                                        <table id="table-unit" class="table table-condensed table-striped" th:if="${units}" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr th:unless="${(units == null) or (units.size() == 0) }">
                                                     <th><span>Id</span></th>
@@ -83,7 +83,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>                                      
-                                        <table id="table-concept" class="table table-condensed table-striped" th:if="${concepts}" cellspacing="0">
+                                        <table id="table-concept" class="table table-condensed table-striped" th:if="${concepts}" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr th:unless="${(concepts == null) or (concepts.size() == 0) }">
                                                     <th><span>Id</span></th>

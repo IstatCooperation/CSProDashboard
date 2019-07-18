@@ -1,5 +1,6 @@
 package it.istat.cspro.dashboard.controller;
 
+import it.istat.cspro.dashboard.bean.ReportBean;
 import it.istat.cspro.dashboard.domain.DashboardReport;
 import it.istat.cspro.dashboard.domain.DashboardInfo;
 import it.istat.cspro.dashboard.service.DashboardService;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class BaseController {
 
     private static final Pattern HOUSEHOLD_BY_PATTERN = Pattern.compile("^r_household_expected_by_(.*)$");
+    private static final Integer REPORT_PROGRESS = 1;
+    private static final Integer REPORT_ANALYSIS = 2;
+    private static final Integer REPORT_GIS = 3;
 
     @Autowired
     private DashboardService service;
@@ -32,13 +36,38 @@ public class BaseController {
         return reports;
     }
 
-    @ModelAttribute("householdReports")
-    public List<String> getHouseholdReports() {
-        List<String> reports = new LinkedList<>();
+    @ModelAttribute("analysisReports")
+    public Set<ReportBean> getAnalysisReports() {
+        Set<ReportBean> reports = new HashSet<>();
+        ReportBean report;
         for (DashboardReport r : service.getReports()) {
-            Matcher m = HOUSEHOLD_BY_PATTERN.matcher(r.getTableName());
-            if (m.find()) {
-                reports.add(m.group(1));
+
+            if (r.getType().getId() == REPORT_ANALYSIS) {
+                report = new ReportBean();
+                report.setName(r.getName());
+                report.setTableName(r.getTableName());
+                report.setVisible((r.getIsVisible() == 1));
+                reports.add(report);
+            }
+
+        }
+        return reports;
+    }
+
+    @ModelAttribute("householdReports")
+    public List<ReportBean> getHouseholdReports() {
+        List<ReportBean> reports = new LinkedList<>();
+        ReportBean report;
+        for (DashboardReport r : service.getReports()) {
+            if (r.getType().getId() == REPORT_PROGRESS) {
+                report = new ReportBean();
+                report.setName(r.getName());
+                Matcher m = HOUSEHOLD_BY_PATTERN.matcher(r.getTableName());
+                if (m.find()) {
+                    report.setTableName(m.group(1));
+                }
+                report.setVisible((r.getIsVisible() == 1));
+                reports.add(report);
             }
         }
         return reports;

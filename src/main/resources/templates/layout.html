@@ -23,6 +23,24 @@
     <body>
         <div class="wrapper">
             <header th:fragment="site-header" th:remove="tag">
+                
+                <!-- MESSAGES CONTAINER-->
+                <div id="messages-container" th:if="${session['siteNotificationMessages']}">
+                    <ul id="messages" th:with="notifyMessages=${session['siteNotificationMessages']}">
+                        <th:block th:each="msg : ${notifyMessages}">
+                            <li style="list-style-type: none;" th:class="${'alert alert-'+#strings.toLowerCase(msg.type)+' fade in alert-dismissible'}">
+                                <strong th:text="${msg.type +'! '}">Danger!</strong>
+                                <span style="padding-left: 3px; padding-right: 10px;" th:text="${msg.text}"></span> 
+                                <a data-dismiss="alert" title="close" data-target="#messages-container" href="#messages-container">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </li>
+                        </th:block>
+                        <span th:if="${notifyMessages}" th:remove="all" th:text="${#session.removeAttribute('siteNotificationMessages')}"> </span>
+                    </ul>
+                </div>
+                
+                
                 <div class="topnavbar-wrapper">
                     <nav role="navigation" class="navbar navbar-default navbar-fixed-top topnavbar">
                         <div class="navbar-brand">
@@ -115,8 +133,8 @@
                                                 <span>Households by COUNTRY</span>
                                             </a>
                                         </li>
-                                        <li th:id="${'report-household-' + rep}" th:each="rep,iterationStatus : ${householdReports}">
-                                            <a th:title="${'Households by ' + rep.toUpperCase()}" th:href="@{/report/household/} + ${rep}" th:text="${'Households by ' + rep.toUpperCase()}"></a>
+                                       <li th:id="${'report-household-' + rep.tableName}" th:each="rep : ${householdReports}">
+                                            <a th:if="${rep.visible}" th:title="${rep.name}" th:href="@{/report/household/} + ${rep.tableName}" th:text="${rep.name}"></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -126,17 +144,17 @@
                                         <span>Analysis Report</span>
                                     </a>
                                     <ul id="analysis" class="nav sidebar-subnav collapse" aria-expanded="false">
-                                        <li id="report-population" th:if="${reports.contains('r_individual_info')}">
+                                        <li id="report-population" th:if="${rep.tableName == 'r_individual_info' and rep.visible}" th:each="rep : ${analysisReports}">
                                             <a title="Population" th:href="@{/report/population}">
                                                 <span>Population</span>
                                             </a>
                                         </li>
-                                        <li id="report-questionnaire" th:if="${reports.contains('r_questionnaire_info')}">
+                                        <li id="report-questionnaire" th:if="${rep.tableName == 'r_questionnaire_info' and rep.visible}" th:each="rep : ${analysisReports}">
                                             <a title="Household" th:href="@{/report/questionnaire}">
                                                 <span>Households</span>
                                             </a>
                                         </li>
-                                        <li id="report-sexdistribution" th:if="${reports.contains('r_sex_by_age_group')}">
+                                        <li id="report-sexdistribution" th:if="${rep.tableName == 'r_sex_by_age' and rep.visible}" th:each="rep : ${analysisReports}">
                                             <a title="Sex Distribution" th:href="@{/report/sexdistribution}">
                                                 <span>Sex Distribution</span>
                                             </a>
@@ -172,26 +190,13 @@
                                         </li>
                                     </ul>
                                 </li>
-
                                 <li class="nav-body" sec:authorize="hasRole('ADMIN')">
                                     <a href="#cspro2sql" title="CSPro2Sql" data-toggle="collapse"
                                        class="collapsed" aria-expanded="false">
                                         <i class="fa fa-tasks"></i>
                                         <span>CSPro2Sql</span>
                                     </a>
-                                    <ul id="cspro2sql" class="nav sidebar-subnav collapse" aria-expanded="false">
-                                        <!--li id="cspro2sql-load">
-                                            <a title="Load" th:href="@{/admin/load}">
-                                                <i class="fa fa-download"></i>
-                                                <span>Load</span>
-                                            </a>
-                                        </li-->                                        
-                                        <!--li id="cspro2sql-update">
-                                            <a title="Update" th:href="@{/admin/update}">
-                                                <i class="fa fa-edit"></i>
-                                                <span>Update</span>
-                                            </a>
-                                        </li-->                                        
+                                    <ul id="cspro2sql" class="nav sidebar-subnav collapse" aria-expanded="false">                 
                                         <li id="cspro2sql-dictionaries">
                                             <a title="Dictionaries List" th:href="@{/admin/dictionaries}">
                                                 <i class="fa fa-tablet"></i>
@@ -223,7 +228,8 @@
             </section>
 
             <footer th:fragment="site-footer">
-                Istat Cooperation
+                <span>2019 - Developd by <a href="https://www.istat.it/en/">Istat</a></span>
+                <span class="pull-right">Funded by <a href="https://www.aics.gov.it/language/en/">AICS</a></span>
             </footer>
 
         </div>

@@ -23,7 +23,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="card">
+                                <div class="card" style="display:none">
                                     <div class="card-header">
                                         <span id="header-progress" class="header-tag-first" onclick="javascript:showPanel('progress');" title="Concepts"> 
                                             <span class="header-strong">Progress</span>
@@ -37,7 +37,7 @@
 
                                     </div>
                                     <div class="card-body">
-                                        <table id="table-progress" class="table table-condensed table-striped" th:if="${dashBoardreports}" cellspacing="0">
+                                        <table id="table-progress" class="table table-condensed table-striped" th:if="${dashBoardreports}" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr th:unless="${(dashBoardreports == null) or (dashBoardreports.size() == 0) }">
                                                     <th><span>Id</span></th>
@@ -65,7 +65,7 @@
                                             </tbody>
                                         </table>
                                         
-                                        <table id="table-analysis" class="table table-condensed table-striped" th:if="${dashBoardreports}" cellspacing="0">
+                                        <table id="table-analysis" class="table table-condensed table-striped" th:if="${dashBoardreports}" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr th:unless="${(dashBoardreports == null) or (dashBoardreports.size() == 0) }">
                                                     <th><span>Id</span></th>
@@ -95,7 +95,7 @@
                                             </tbody>
                                         </table>
                                         
-                                        <table id="table-gis" class="table table-condensed table-striped" th:if="${dashBoardreports}" cellspacing="0">
+                                        <table id="table-gis" class="table table-condensed table-striped" th:if="${dashBoardreports}" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr th:unless="${(dashBoardreports == null) or (dashBoardreports.size() == 0) }">
                                                     <th><span>Id</span></th>
@@ -139,7 +139,7 @@
         <div class="modal fade" id="edit-report-modal" role="dialog" >
             <div class="modal-dialog " role="document">
                 <div class="modal-content ">
-                    <form th:action="@{/admin/editReport}" id="form" class="form-horizontal" method="post">
+                    <form id="form" class="form-horizontal" action="#">
                         <input type="hidden" value="" name="id" id="report-id"/>
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -158,7 +158,7 @@
                                             <label class="control-label"><span>Name</span></label>
                                         </div>
                                         <div class="col-lg-10">
-                                            <input name="nome" id="report-name" title="Name" class="form-control" type="text" />
+                                            <input name="name" id="report-name" title="Name" class="form-control" type="text" />
                                             <span class="help-block">
                                                 <small class="text-danger" id="nomesesserror"></small>
                                             </span>
@@ -182,7 +182,7 @@
                                             <label class="control-label"><span>Display</span></label>
                                         </div>
                                         <div class="col-lg-10">
-                                            <select id="report-visible" style="margin-top: 5px">
+                                            <select name="display" id="report-visible" style="margin-top: 5px">
                                                 <option value=0 >NO</option>
                                                 <option value=1 >YES</option>
                                             </select> 
@@ -196,7 +196,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             <span>Close</span>
                         </button>
-                        <button type="button" id="btn-submit-ns" class=" btn btn-primary">
+                        <button type="button" id="btn-submit-ns" class=" btn btn-primary" onclick="save()">
                             <span>Save</span>
                         </button>
                     </div>

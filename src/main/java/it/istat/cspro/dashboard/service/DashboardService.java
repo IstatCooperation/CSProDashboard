@@ -16,6 +16,7 @@ import it.istat.cspro.dashboard.domain.DashboardInfo;
 import it.istat.cspro.dashboard.domain.DashboardUnit;
 import it.istat.cspro.dashboard.domain.DashboardVariable;
 import it.istat.cspro.dashboard.dao.DashboardReportDao;
+import it.istat.cspro.dashboard.forms.ReportUpdateForm;
 
 /**
  *
@@ -38,7 +39,6 @@ public class DashboardService {
     @Autowired
     private DashboardConceptDao dashboardConceptDao;
 
-
     public List<DashboardReport> getReports() {
         return dashboardReportDao.findAll();
     }
@@ -58,9 +58,22 @@ public class DashboardService {
     public List<DashboardUnit> getUnits() {
         return dashboardUnitDao.findAll();
     }
-    
+
     public List<DashboardConcept> getConcepts() {
         return dashboardConceptDao.findAll();
     }
-    
+
+    public DashboardReport updateReport(ReportUpdateForm form) {
+
+        DashboardReport report = dashboardReportDao.findById(form.getId()).orElse(null);
+
+        if (report != null) {
+            report.setName(form.getName());
+            report.setIsVisible(form.getDisplay());
+            dashboardReportDao.save(report);
+        }
+
+        return report;
+
+    }
 }

@@ -329,6 +329,12 @@ aside.toggle-off .active {
     padding: 15px;
     z-index: 109;
 }
+
+footer a{
+    font-weight: 600;
+    padding-right: 15px;
+}
+
 /* END FOOTER */
 
 /* START WIDGET */
@@ -749,4 +755,16 @@ fieldset {
     font-weight: 700;
     font-size: 14px;
     padding-left: 10px;
+}
+#messages {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#messages-container {
+
+    z-index: 1000;
+    position: absolute;
+    top: 20px;
+    left: 30%;
 }

@@ -7,6 +7,11 @@ $(window).resize(function () {
 $(function () {
     toggleMenu(true);
     //$('body').css('min-height', 40 * $('ul.nav li').length + 150);
+    setTimeout(function () {
+        $("#messages-container").fadeOut();
+    }, 4000);
+
+    $('.modal').modal({show: false, backdrop: 'static', keyboard: false});
 });
 
 //Set menu active

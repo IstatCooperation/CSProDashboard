@@ -30,8 +30,7 @@
                     </div>
                     <div class="container-fluid">
                         <div class="panel col-lg-7">
-                            <form action="#" th:action="@{/users/edituser}"
-                                  th:object="${userCreateForm}" method="post">
+                            <form action="#" th:action="@{/users/edituser}" th:object="${userCreateForm}" method="post">
                                 <div class="panel-body">
                                     <div class="alert alert-danger panel-danger" th:if="${#fields.hasErrors()}">
                                         Error
