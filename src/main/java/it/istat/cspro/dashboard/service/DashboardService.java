@@ -17,6 +17,7 @@ import it.istat.cspro.dashboard.domain.DashboardUnit;
 import it.istat.cspro.dashboard.domain.DashboardVariable;
 import it.istat.cspro.dashboard.dao.DashboardReportDao;
 import it.istat.cspro.dashboard.forms.ReportUpdateForm;
+import it.istat.cspro.dashboard.territory.dao.TerritoryDao;
 
 /**
  *
@@ -55,6 +56,12 @@ public class DashboardService {
         return dashboardVariableDao.findAll();
     }
 
+    public List<DashboardVariable> getTerritoryVariables() {
+        DashboardConcept territoryConcept = new DashboardConcept();
+        territoryConcept.setId(TerritoryDao.TERRITORY_CONCEPT);
+        return dashboardVariableDao.findByConcept(territoryConcept);
+    }
+    
     public List<DashboardUnit> getUnits() {
         return dashboardUnitDao.findAll();
     }

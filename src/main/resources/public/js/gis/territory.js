@@ -1,49 +1,64 @@
 //global variables
-var structure = ['region', 'depart', 'souspref', 'p03', 'p04'];
-var level = 0; //root
-var code = 0;
+var structure = [];
+var level = 1; //root
+var codes = [0];
 
 $(function () {
     setMenuActive("territory");
-    loadSearchFilters(code); //root
+    getTerritoryStructure();
+    loadSearchFilters(0); //root
 });
 
-function search() {
+function getTerritoryStructure() {
+
+    $.ajax({
+        url: ctx + "/rest/meta/territory/",
+        type: "GET",
+        async: false, //must wait until it completes
+        success: function (data) {
+            structure = data;
+        },
+        error: function () {
+            alert('Error loading data');
+        }
+    });
+}
+
+function createFilters() {
 
     var elementLevel = getLevel(this.id);
+    var elementVal = this.options[this.selectedIndex].value;
+
+    getCodes(elementLevel, elementVal);
 
     if (elementLevel < level) { //going back
         deleteElements(elementLevel);
         level = elementLevel;
     }
 
-    if (level < 2) { //if root
-        code = $("#" + structure[0]).val();
-    } else {
-        code += "," + $("#" + structure[level - 1]).val();
+    if (!isLastLevel(elementLevel) && elementVal > 0) {
+        loadSearchFilters(elementLevel);
+        level++; //going forward
     }
-    
-    loadSearchFilters(code);
 }
 
-
-function loadSearchFilters(ids) {
+function loadSearchFilters(elementLvl) {
 
     var div = document.createElement('div'); //search filters div
     div.className = 'col-lg-2';
     var select = document.createElement('select');
     select.className = 'form-control';
-    select.id = structure[level];
-    select.onchange = search;
+    select.id = structure[elementLvl];
+    select.onchange = createFilters;
 
     $.ajax({
-        url: ctx + "/rest/territory/filter/" + ids,
+        url: ctx + "/rest/territory/filter/" + getCodeString(),
         type: "GET",
         success: function (data) {
             var option = document.createElement('option');
             option.value = -1;
-            option.text = structure[level - 1];
-            option.selected = "selected";
+            option.text = structure[elementLvl];
+            option.selected = true;
             select.append(option);
 
             $.each(data, function (index) {
@@ -60,8 +75,31 @@ function loadSearchFilters(ids) {
             alert('Error loading data');
         }
     });
-    level++;
 }
+
+function loadTerritory() {
+
+    $.ajax({
+        url: ctx + "/rest/territory/" + getCodeString(),
+        type: "GET",
+        datatype: 'json',
+        success: function (data) {
+            __populate(data, structure, "territory-table");
+            $("territory-table-row").show();
+        },
+        error: function () {
+            alert('Error loading data');
+        }
+    });
+}
+
+
+function clearFilters() {
+    deleteElements(1);
+    level = 1;
+    $("#" + structure[0]).val(-1);
+}
+
 
 function getLevel(elementName) {
     for (var i = 0; i < structure.length; i++) {
@@ -71,6 +109,10 @@ function getLevel(elementName) {
     return -1;
 }
 
+function isLastLevel(elementLevel) {
+    return elementLevel === structure.length;
+}
+
 function deleteElements(nextElement) {
     for (var i = nextElement; i < structure.length; i++) {
         var element = document.getElementById(structure[i]);
@@ -78,4 +120,28 @@ function deleteElements(nextElement) {
             element.parentNode.remove(element);
         }
     }
+}
+
+function getCodes(elementLevel, elementVal) {
+
+    if (elementLevel === 1) { //if root
+        codes = [];
+    } else if (elementLevel < level) { //if going back -> splice
+        var len = codes.length;
+        for (var i = elementLevel - 1; i < len; i++) {
+            codes.pop();
+        }
+    }
+
+    if (elementVal > 0) {
+        codes.push(elementVal);
+    }
+}
+
+function getCodeString() {
+    var tmpCode = "";
+    for (var i = 0; i < codes.length; i++) {
+        tmpCode += codes[i] + ",";
+    }
+    return tmpCode.substring(0, tmpCode.length - 1);
 }

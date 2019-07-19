@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TerritoryDao {
 
-    private static final int TERRITORY_CONCEPT = 4;
+    public static final int TERRITORY_CONCEPT = 4;
     private static final int TERRITORY_ROOT = 0;
 
     @Autowired
@@ -46,12 +46,12 @@ public class TerritoryDao {
                     whereCondition += " and ";
                 }
             }
-            queryString = "SELECT distinct " + hierarchy.get(codes.length).getName() + "_NAME, " + 
-                    hierarchy.get(codes.length).getName() + " FROM territory " + whereCondition;
+            queryString = "SELECT distinct " + hierarchy.get(codes.length).getName() + "_NAME, "
+                    + hierarchy.get(codes.length).getName() + " FROM territory " + whereCondition;
         }
 
         Query query = em.createNativeQuery(queryString);
-        
+
         return query.getResultList();
 
     }
@@ -71,10 +71,11 @@ public class TerritoryDao {
 
         fields = fields.substring(0, fields.lastIndexOf(",")); //remove last comma
 
-        String queryString = "";
-        String whereCondition = "WHERE ";
+        String queryString;
+        String whereCondition = "";
 
         if (codes[0] != TERRITORY_ROOT) {
+            whereCondition = "WHERE ";
             for (int i = 0; i < codes.length; i++) {
                 if (i == codes.length - 1) { //is last
                     whereCondition += hierarchy.get(i).getName() + " = " + codes[i] + ";";
@@ -82,8 +83,9 @@ public class TerritoryDao {
                     whereCondition += hierarchy.get(i).getName() + " = " + codes[i] + " and ";
                 }
             }
-            queryString = "SELECT " + fields + " FROM territory " + whereCondition;
-        }
+        } 
+
+        queryString = "SELECT " + fields + " FROM territory " + whereCondition;
 
         Query query = em.createNativeQuery(queryString);
 
