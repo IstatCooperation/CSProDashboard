@@ -2,6 +2,7 @@
 var structure = [];
 var level = 1; //root
 var codes = [0];
+var territoryTable;
 
 $(function () {
     setMenuActive("territory");
@@ -55,9 +56,9 @@ function loadSearchFilters(elementLvl) {
         url: ctx + "/rest/territory/filter/" + getCodeString(),
         type: "GET",
         success: function (data) {
-            var option = document.createElement('option');
+            var option = document.createElement('option'); //default option
             option.value = -1;
-            option.text = structure[elementLvl];
+            option.text = "Select " + structure[elementLvl];
             option.selected = true;
             select.append(option);
 
@@ -84,8 +85,19 @@ function loadTerritory() {
         type: "GET",
         datatype: 'json',
         success: function (data) {
-            __populate(data, structure, "territory-table");
-            $("territory-table-row").show();
+            var rows = [];
+            jQuery.each(data, function (x) {
+                rows[x] = [];
+                for (var y = 0; y < structure.length; y++) {
+                    rows[x][y] = data[x][y * 2]; //get description
+                }
+            });
+            var columns = [];
+            for (var i = 0; i < structure.length; i++) {
+                columns[i] = {title: structure[i]};
+            }
+            populateTable(rows, columns);
+            $("#territory-table-row").show();
         },
         error: function () {
             alert('Error loading data');
@@ -97,6 +109,7 @@ function loadTerritory() {
 function clearFilters() {
     deleteElements(1);
     level = 1;
+    codes = [0];
     $("#" + structure[0]).val(-1);
 }
 
@@ -144,4 +157,26 @@ function getCodeString() {
         tmpCode += codes[i] + ",";
     }
     return tmpCode.substring(0, tmpCode.length - 1);
+}
+
+function populateTable(dataSet, columnsSet) {
+
+    if (typeof territoryTable !== 'undefined') {
+        territoryTable.clear().draw();
+        territoryTable.rows.add(dataSet); // Add new data
+        territoryTable.columns.adjust().draw(); // Redraw the DataTable
+    } else {
+        territoryTable = $('#territory-table').DataTable({
+            data: dataSet,
+            columns: columnsSet,
+            responsive: true,
+            lengthChange: false,
+            pageLength: 15,
+            order: [[0, "asc"]],
+            buttons: ['csv', 'excel', 'pdf']
+        });
+        territoryTable.buttons().container().appendTo('#' + tableId + '_wrapper .col-sm-6:eq(0)');
+    }
+
+
 }
