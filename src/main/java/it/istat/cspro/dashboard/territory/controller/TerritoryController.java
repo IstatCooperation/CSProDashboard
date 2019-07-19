@@ -12,5 +12,10 @@ public class TerritoryController extends BaseController {
     public String territoryHome(Model model) {
         return "gis/territory";
     }
+    
+    @RequestMapping("/gis/map")
+    public String mapHome(Model model) {
+        return "gis/map";
+    }
 
 }

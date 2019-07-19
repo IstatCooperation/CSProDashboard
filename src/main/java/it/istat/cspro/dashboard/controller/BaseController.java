@@ -41,7 +41,6 @@ public class BaseController {
         Set<ReportBean> reports = new HashSet<>();
         ReportBean report;
         for (DashboardReport r : service.getReports()) {
-
             if (r.getType().getId() == REPORT_ANALYSIS) {
                 report = new ReportBean();
                 report.setName(r.getName());
@@ -73,6 +72,24 @@ public class BaseController {
         return reports;
     }
 
+     @ModelAttribute("gisReports")
+    public Set<ReportBean> geGISReports() {
+        Set<ReportBean> reports = new HashSet<>();
+        ReportBean report;
+        for (DashboardReport r : service.getReports()) {
+            if (r.getType().getId() == REPORT_GIS) {
+                report = new ReportBean();
+                report.setId(r.getId());
+                report.setName(r.getName());
+                report.setTableName(r.getDescription());
+                report.setVisible((r.getIsVisible() == 1));
+                reports.add(report);
+            }
+
+        }
+        return reports;
+    }
+    
     @ModelAttribute("dashboardInfo")
     public DashboardInfo getDashboardInfo() {
         return service.getDashboardInfo();

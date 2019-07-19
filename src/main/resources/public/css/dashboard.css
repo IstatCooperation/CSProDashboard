@@ -180,6 +180,8 @@ body, html {
 }
 .sidebar {
     height: 100%;
+    padding-top: 10px;
+    padding-left: 14px;
     padding-bottom: 20px;
     overflow-y: auto;
     border-right: 1px solid #c8ced3;
@@ -229,17 +231,27 @@ aside.toggle-off .active {
 }
 
 .menu-spacer{
-    border-bottom: 1px solid #196889;
-    margin-bottom: 5px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    padding-left: 3px;
 }
+
+.menu-line{
+    border-bottom: 1px solid #196889;
+}
+
+.menu-selected{
+    font-weight: 500;
+}
+
 .nav > li > a{
     color: #196889;
-    padding: 15px;
+    padding: 15px 15px 15px 5px;
 }
 
 .nav ul > li > a{
     color: #196889;
-    padding-left: 40px;
+    padding-left: 30px;
     padding-top: 3px;
     overflow: hidden !important;
     text-overflow: ellipsis;
@@ -268,8 +280,12 @@ aside.toggle-off .active {
 
 #home{
     padding-bottom: 8px;
+    padding-top: 8px;
 }
 
+.header-nav a{
+    padding: 16px 15px!important;
+}
 /* END LEFT SIDEBAR */
 
 /* START CONTAINER */
@@ -290,7 +306,7 @@ aside.toggle-off .active {
     margin: -20px;
     margin-top: 30px;
     margin-bottom: 12px;
-    padding: 14px;
+    padding: 16px 0px 15px 15px;
     font-size: 14px;
     line-height: 1.1;
     color: #333;
@@ -333,6 +349,10 @@ aside.toggle-off .active {
 footer a{
     font-weight: 600;
     padding-right: 15px;
+}
+
+footer img{
+    margin-bottom: 7px;
 }
 
 /* END FOOTER */

@@ -175,7 +175,7 @@ function populateTable(dataSet, columnsSet) {
             order: [[0, "asc"]],
             buttons: ['csv', 'excel', 'pdf']
         });
-        territoryTable.buttons().container().appendTo('#' + tableId + '_wrapper .col-sm-6:eq(0)');
+        territoryTable.buttons().container().appendTo('#territory-table_wrapper .col-sm-6:eq(0)');
     }
 
 

@@ -76,7 +76,7 @@
                                                     <td th:text="${unit.id}"></td>
                                                     <td th:text="${unit.name}"></td>
                                                     <td th:text="${unit.note}"></td>
-                                                    <td th:if="${unit.parent == null}"> - </td>
+                                                    <td th:if="${unit.parent == null}"> Dictionary </td>
                                                     <td th:unless="${unit.parent == null}" th:text="${unit.parent.name}"></td>
                                                     <td th:if="${unit.concept == null}"> - </td>
                                                     <td th:unless="${unit.concept == null}" th:text="${unit.concept.name}"></td>
