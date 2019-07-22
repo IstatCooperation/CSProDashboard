@@ -58,7 +58,7 @@ function loadSearchFilters(elementLvl) {
         success: function (data) {
             var option = document.createElement('option'); //default option
             option.value = -1;
-            option.text = "Select " + structure[elementLvl];
+            option.text = structure[elementLvl];
             option.selected = true;
             select.append(option);
 

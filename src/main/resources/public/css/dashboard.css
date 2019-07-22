@@ -364,7 +364,7 @@ footer img{
 }
 .widget.panel, .widget .panel {
     overflow: hidden;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 .row-table {
     display: table;
@@ -763,7 +763,7 @@ fieldset {
 
 .well-app {
     font-size: 16px;
-    margin-top: 20px !important;
+    margin-top: 10px !important;
     background-color: #fff !important;
     color: #155873 !important;
     padding: 15px;
@@ -790,5 +790,5 @@ fieldset {
 }
 
 #search-filters .col-lg-2 {
-    width: 12%;
+    width: 15%;
 }
