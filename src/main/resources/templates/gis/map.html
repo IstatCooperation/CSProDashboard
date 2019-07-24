@@ -3,10 +3,9 @@
 
     <head th:replace="layout :: site-head"/>
     <head>
-        <link th:href="@{/css/table/datatables.css}" rel="stylesheet" />
-        <script th:src="@{/js/table/datatables.js}"></script>
-        <script th:src="@{/js/report/householdTable.js}"></script>
-        <script th:src="@{/js/gis/territory.js}"></script>
+        <link th:href="@{/css/leaflet/leaflet.css}" rel="stylesheet" />
+        <script th:src="@{/js/leaflet/leaflet.js}"></script>
+        <script th:src="@{/js/gis/map.js}"></script>
     </head>
 
     <body>
@@ -26,22 +25,16 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <span>Filters</span>
+                                        <span>Map</span>
                                         <div class="card-header-actions">
-                                            <a class="card-header-action" href="javascript:void(0)" onclick="javascript:clearFilters();" title="Clear filters"> 
-                                                <i class="fa fa-trash-o"></i>
-                                                <span>Clear</span>
-                                            </a>
-                                             <a class="card-header-action" href="javascript:void(0)" onclick="javascript:loadTerritory();" title="Search"> 
-                                                <i class="fa fa-search"></i>
-                                                <span>Search</span>
+                                            <a class="card-header-action" href="javascript:void(0)" onclick="javascript:reset();" title="Clear filters"> 
+                                                <i class="fa fa-refresh"></i>
+                                                <span>Reload</span>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <form>
-                                            <div class="form-row" id="search-filters"></div>
-                                        </form>                           
+                                         <div id="mapid"></div>                         
                                     </div>
                                 </div>
                             </div>
