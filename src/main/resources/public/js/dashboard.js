@@ -142,3 +142,22 @@ function renderTable(idTable, filters) {
     });
     table.buttons().container().appendTo('#' + idTable + '_wrapper .col-sm-6:eq(0)');
 }
+
+function remove(array, element) {
+    const index = array.indexOf(element);
+    array.splice(index, 1);
+}
+
+function removeElements(array, elements) {
+    if (elements.length > 0) {
+        writeClientMsg(elements.length + " records are not available in the view. These records territory doesn't match territory table.");
+    }
+    for (var j in elements) {
+        remove(array, elements[j]);
+    }
+}
+
+function writeClientMsg(msg){
+    $("#messages-client-msg").text(msg);
+    $("#messages-client-container").fadeIn();
+}

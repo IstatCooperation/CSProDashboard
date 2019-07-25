@@ -1,5 +1,6 @@
 package it.istat.cspro.dashboard.territory.service;
 
+import it.istat.cspro.dashboard.bean.SpatialPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,5 +34,9 @@ public class TerritoryService {
     
     public Integer getNonMatchingHouseholdCount() {
         return territoryDao.getNonMatchingHouseholdCount();
+    }
+    
+    public List<SpatialPoint> getSpatialPoints(){
+        return territoryDao.getSpatialPoints();
     }
 }

@@ -4,7 +4,10 @@
     <head th:replace="layout :: site-head"/>
     <head>
         <link th:href="@{/css/leaflet/leaflet.css}" rel="stylesheet" />
+        <link th:href="@{/css/leaflet/MarkerCluster.css}" rel="stylesheet" />
+        <link th:href="@{/css/leaflet/MarkerCluster.Default.css}" rel="stylesheet" />
         <script th:src="@{/js/leaflet/leaflet.js}"></script>
+        <script th:src="@{/js/leaflet/leaflet.markercluster.js}"></script>
         <script th:src="@{/js/gis/map.js}"></script>
     </head>
 
@@ -34,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                         <div id="mapid"></div>                         
+                                         <div id="map-container"></div>                         
                                     </div>
                                 </div>
                             </div>

@@ -26,8 +26,8 @@
             <header th:fragment="site-header" th:remove="tag">
 
                 <!-- MESSAGES CONTAINER-->
-                <div id="messages-container" th:if="${session['siteNotificationMessages']}">
-                    <ul id="messages" th:with="notifyMessages=${session['siteNotificationMessages']}">
+                <div id="messages-container">
+                    <ul id="messages" th:with="notifyMessages=${session['siteNotificationMessages']}" th:if="${session['siteNotificationMessages']}">
                         <th:block th:each="msg : ${notifyMessages}">
                             <li style="list-style-type: none;" th:class="${'alert alert-'+#strings.toLowerCase(msg.type)+' fade in alert-dismissible'}">
                                 <strong th:text="${msg.type +'! '}">Danger!</strong>
@@ -38,6 +38,17 @@
                             </li>
                         </th:block>
                         <span th:if="${notifyMessages}" th:remove="all" th:text="${#session.removeAttribute('siteNotificationMessages')}"> </span>
+                    </ul>
+                </div>
+                <div id="messages-client-container" class="alert-danger" style="display: none">
+                    <ul id="messages-client" th:unless="${session['siteNotificationMessages']}">
+                        <li style="list-style-type: none;" class="alert-error">
+                            <strong>Danger!</strong>
+                            <span id="messages-client-msg" style="padding-left: 3px; padding-right: 10px;"></span> 
+                            <a data-dismiss="alert" title="close" data-target="#messages-client-container" href="#messages-client-container">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -97,7 +108,7 @@
                             </div>
                             <div class="modal-body">
                                 <span>
-                                  <!-- Description goes here -->
+                                    <!-- Description goes here -->
                                 </span>
                             </div>
                         </div>
@@ -185,8 +196,8 @@
                                                 <span>Territory</span>
                                             </a>
                                         </li>
-                                        <li id="maps-by-region">
-                                            <a title="Maps by Region" th:href="@{/gis/map}" th:if="${rep.id == 2 and rep.visible}" th:each="rep : ${gisReports}">
+                                        <li id="map">
+                                            <a title="Maps" th:href="@{/gis/map}" th:if="${rep.id == 2 and rep.visible}" th:each="rep : ${gisReports}">
                                                 <span>Maps</span>
                                             </a>
                                         </li>

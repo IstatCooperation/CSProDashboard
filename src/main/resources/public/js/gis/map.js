@@ -1,13 +1,15 @@
 $(function () {
 
-    var map = L.map('mapid', {
+    setMenuActive("map");
+
+    var map = L.map('map-container', {
         center: [7.4608454, -7.7917077],
         zoom: 8
     });
 
     var resize = function () {
-        var $map = $('#map');
-        $map.height($(window).height());
+        var $map = $('#map-container');
+        $map.height($(window).height() - 300);
         if (map) {
             map.invalidateSize();
         }
@@ -24,6 +26,18 @@ $(function () {
     });
 
     baseLayer.addTo(map);
+
+    setCountry(map);
+    setRegion(map);
+    setMarkers(map);
+
+});
+
+function reset() {
+    window.location = ctx + "/gis/map";
+}
+
+function setCountry(map) {
 
     var countryStyle = {
         color: "#ff7800",
@@ -42,13 +56,18 @@ $(function () {
             map.fitBounds(countryLayer.getBounds());
         }
     });
-    
+
+}
+
+function setRegion(map) {
+
     var regionStyle = {
-        color: "#e70000",
-        weight: 0
+        color: "#ff7800",
+        weight: 0,
+        opacity: 0.5
     };
-    
-     $.ajax({
+
+    $.ajax({
         dataType: "json",
         url: 'https://nominatim.openstreetmap.org/search?q=montagnes,cote%20d%27ivoire&polygon_geojson=1&format=geojson',
         success: function (data) {
@@ -58,13 +77,27 @@ $(function () {
             regionLayer.addTo(map);
         }
     });
-    
-    L.marker([7.514788400, -7.94027340]).addTo(map).openPopup();
-});
-
-function reset(){
-    window.location = ctx + "/gis/map";
 }
 
+function setMarkers(map) {
+    
+    var markerStyle = {
+        color: "#196889",
+        weight: 0,
+        opacity: 0.5
+    };
 
-
+    $.ajax({
+        dataType: "json",
+        url: ctx + '/rest/territory/coordinates',
+        success: function (data) {
+            var markers = L.markerClusterGroup();
+            //markers.addLayer(L.marker(getRandomLatLng(map)));
+            $.each(data, function (i) {
+                var marker = L.marker([data[i].lat, data[i].lon]);
+                markers.addLayer(marker);
+            });
+            map.addLayer(markers);
+        }
+    });
+}

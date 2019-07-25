@@ -25,8 +25,7 @@ public class ReportRestController {
     private ProcessReportService processService;
 
     @RequestMapping(value = "/rest/report/{key}")
-    public Object objectReport(@PathVariable("key") String key,
-            @RequestParam(name = "region", required = false) Integer region) {
+    public Object objectReport(@PathVariable("key") String key, @RequestParam(name = "region", required = false) Integer region) {
         try {
             Matcher m = HOUSEHOLD_BY_PATTERN.matcher(key);
             if (m.find()) {

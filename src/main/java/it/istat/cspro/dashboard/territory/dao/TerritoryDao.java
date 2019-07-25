@@ -1,12 +1,15 @@
 package it.istat.cspro.dashboard.territory.dao;
 
+import it.istat.cspro.dashboard.bean.SpatialPoint;
 import it.istat.cspro.dashboard.dao.DashboardUnitDao;
 import it.istat.cspro.dashboard.dao.DashboardVariableDao;
 import it.istat.cspro.dashboard.domain.DashboardConcept;
 import it.istat.cspro.dashboard.domain.DashboardUnit;
 import it.istat.cspro.dashboard.domain.DashboardVariable;
 import it.istat.cspro.dashboard.utils.Utility;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.EntityManager;
@@ -121,18 +124,18 @@ public class TerritoryDao {
 
     public Integer getNonMatchingHouseholdCount() {
         BigInteger count;
-        
+
         String queryString = "SELECT COUNT(*) FROM h_denombrement_quest h NATURAL LEFT JOIN territory WHERE @ROOT_TERRITORY_NAME IS NULL;";
-        
+
         List<DashboardVariable> hierarchy = getHouseholdTerritoryVariables();
         queryString = queryString.replace("@ROOT_TERRITORY_NAME", hierarchy.get(0).getName() + "_NAME");
 
         Query query = em.createNativeQuery(queryString);
 
         count = (BigInteger) query.getSingleResult();
-        
+
         return count.intValue();
-        
+
     }
 
     public List<DashboardVariable> getHouseholdTerritoryVariables() {
@@ -144,6 +147,43 @@ public class TerritoryDao {
 
         return dashboardVariableDao.findByConceptAndUnit(territoryConcept, householdUnit);
 
+    }
+
+    public List<DashboardVariable> getLatitudeLongitudeVariables() {
+        List<DashboardVariable> variables = new ArrayList<>();
+        DashboardConcept latitudeConcept = new DashboardConcept();
+        latitudeConcept.setId(Utility.CONCEPT_LATITUDE_ID);
+        DashboardConcept longitudeConcept = new DashboardConcept();
+        longitudeConcept.setId(Utility.CONCEPT_LONGITUDE_ID);
+        DashboardVariable latitudeVar = dashboardVariableDao.findByConcept(latitudeConcept).get(0);
+        DashboardVariable longitudeVar = dashboardVariableDao.findByConcept(longitudeConcept).get(0);
+        variables.add(latitudeVar);
+        variables.add(longitudeVar);
+        return variables;
+
+    }
+
+    public List<SpatialPoint> getSpatialPoints() {
+        List<SpatialPoint> points = new ArrayList<>();
+        List<DashboardVariable> variables = getLatitudeLongitudeVariables();
+        
+        String latitude = "", longitude = "", table = "";
+        if(!variables.isEmpty()){
+            latitude = variables.get(0).getName();
+            longitude = variables.get(1).getName();
+            table = "h_" + variables.get(0).getUnit().getName(); //TO BE FIXED (ADD FIELD TABLE NAME TO UNITS)
+        }
+        
+        String queryString = "SELECT " + latitude + ", " + longitude + " FROM " + table;
+        BigDecimal lat, lon;
+        List<Object[]> results = em.createNativeQuery(queryString).getResultList();
+        for(Object[] result: results){
+            lat = (BigDecimal) result[0];
+            lon = (BigDecimal) result[1];
+            points.add(new SpatialPoint(lat.doubleValue(), lon.doubleValue()));
+        }
+        
+        return points;
     }
 
 }

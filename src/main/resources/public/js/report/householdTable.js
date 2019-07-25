@@ -24,10 +24,17 @@ function populate(url, tableId) {
         datatype: 'json',
         success: function (json) {
             var data = json.splice(1);
+            var emptyData = [];
             for (var i in data) {
-                data[i] = data[i].splitted;
-                clean(data[i]);
+                if (data[i].name === null) {
+                    emptyData.push(data[i]);
+                } else {
+                    data[i] = data[i].splitted;
+                    clean(data[i]);
+                }
             }
+            removeElements(data, emptyData);
+
             var columnsSet = [];
             for (var i in json[0].splitted) {
                 columnsSet.push({title: json[0].splitted[i]});
@@ -45,7 +52,7 @@ function populate(url, tableId) {
             $("#error-panel").show();
         }
     });
-    
+
 }
 
 function __populate(dataSet, columnsSet, tableId) {
@@ -84,4 +91,3 @@ function __populate(dataSet, columnsSet, tableId) {
     });
     table.buttons().container().appendTo('#' + tableId + '_wrapper .col-sm-6:eq(0)');
 }
-

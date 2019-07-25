@@ -43,13 +43,19 @@ public class RHouseholdExpectedBase implements Serializable {
     }
 
     public List getSplitted() {
-        List values = new ArrayList(Arrays.asList(name.split("#")));
+        List values;
+        if (name != null && !name.equals("")) {
+            values = new ArrayList(Arrays.asList(name.split("#")));
+        } else{
+            values = new ArrayList();
+        }
         values.add(field);
         values.add(freshlist);
         values.add(expected);
         values.add(field_freshlist);
         values.add(field_expected);
         values.add(freshlist_expected);
+
         return values;
     }
 

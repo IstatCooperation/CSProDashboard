@@ -776,17 +776,33 @@ fieldset {
     font-size: 14px;
     padding-left: 10px;
 }
-#messages {
+#messages{
     padding-left: 0px;
     padding-right: 0px;
 }
 
-#messages-container {
+#messages-client{
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 0px;
+}
 
+#messages-container, #messages-client-container{
     z-index: 1000;
     position: absolute;
     top: 20px;
     left: 30%;
+}
+
+#messages-client-container{
+    margin-bottom: 0px!important;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+#messages-client-container a{
+    color: #a94442;
 }
 
 #search-filters .col-lg-2 {
