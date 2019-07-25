@@ -26,4 +26,12 @@ public class TerritoryService {
     public List<Object[]> getTerritory(Integer[] codes) {
         return territoryDao.getTerritory(codes);
     }
+    
+    public List<Object[]> getNonMatchingHousehold() {
+        return territoryDao.getNonMatchingHousehold();
+    }
+    
+    public Integer getNonMatchingHouseholdCount() {
+        return territoryDao.getNonMatchingHouseholdCount();
+    }
 }

@@ -1,5 +1,6 @@
 package it.istat.cspro.dashboard.service;
 
+import com.mysql.cj.util.Util;
 import it.istat.cspro.dashboard.dao.CSPro2SqlErrorDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import it.istat.cspro.dashboard.domain.DashboardVariable;
 import it.istat.cspro.dashboard.dao.DashboardReportDao;
 import it.istat.cspro.dashboard.forms.ReportUpdateForm;
 import it.istat.cspro.dashboard.territory.dao.TerritoryDao;
+import it.istat.cspro.dashboard.utils.Utility;
 
 /**
  *
@@ -39,6 +41,8 @@ public class DashboardService {
     private DashboardUnitDao dashboardUnitDao;
     @Autowired
     private DashboardConceptDao dashboardConceptDao;
+    @Autowired
+    private TerritoryDao territoryDao;
 
     public List<DashboardReport> getReports() {
         return dashboardReportDao.findAll();
@@ -57,9 +61,7 @@ public class DashboardService {
     }
 
     public List<DashboardVariable> getTerritoryVariables() {
-        DashboardConcept territoryConcept = new DashboardConcept();
-        territoryConcept.setId(TerritoryDao.TERRITORY_CONCEPT);
-        return dashboardVariableDao.findByConcept(territoryConcept);
+        return territoryDao.getHouseholdTerritoryVariables();
     }
     
     public List<DashboardUnit> getUnits() {

@@ -29,5 +29,18 @@ public class TerritoryRestController {
 
         return territoryMap;
     }
+    
+    @RequestMapping(value = "/rest/territory/unmatch")
+    public List<Object[]> nonMatchingHousehold() {
+
+        List<Object[]> territoryMap = territoryService.getNonMatchingHousehold();
+
+        return territoryMap;
+    }
+    
+    @RequestMapping(value = "/rest/territory/unmatchCount")
+    public Integer nonMatchingHouseholdCount() {
+        return territoryService.getNonMatchingHouseholdCount();
+    }
 
 }

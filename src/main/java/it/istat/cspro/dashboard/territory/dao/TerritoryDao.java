@@ -1,9 +1,14 @@
 package it.istat.cspro.dashboard.territory.dao;
 
+import it.istat.cspro.dashboard.dao.DashboardUnitDao;
 import it.istat.cspro.dashboard.dao.DashboardVariableDao;
 import it.istat.cspro.dashboard.domain.DashboardConcept;
+import it.istat.cspro.dashboard.domain.DashboardUnit;
 import it.istat.cspro.dashboard.domain.DashboardVariable;
+import it.istat.cspro.dashboard.utils.Utility;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +21,23 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TerritoryDao {
 
-    public static final int TERRITORY_CONCEPT = 4;
-    private static final int TERRITORY_ROOT = 0;
-
     @Autowired
     DashboardVariableDao dashboardVariableDao;
+
+    @Autowired
+    DashboardUnitDao dashboardUnitDao;
 
     @Autowired
     private EntityManager em;
 
     public List<Object[]> getTerritoryFilter(Integer[] codes) {
 
-        DashboardConcept territoryConcept = new DashboardConcept();
-        territoryConcept.setId(TERRITORY_CONCEPT);
-
-        List<DashboardVariable> hierarchy = dashboardVariableDao.findByConcept(territoryConcept);
+        List<DashboardVariable> hierarchy = getHouseholdTerritoryVariables();
 
         String queryString;
         String whereCondition = "WHERE ";
 
-        if (codes[0] == TERRITORY_ROOT) { //root level
+        if (Objects.equals(codes[0], Utility.TERRITORY_ROOT)) { //root level
             queryString = "SELECT distinct " + hierarchy.get(0).getName() + "_NAME, " + hierarchy.get(0).getName() + " FROM territory";
         } else {
             for (int i = 0; i < codes.length; i++) {
@@ -59,7 +61,7 @@ public class TerritoryDao {
     public List<Object[]> getTerritory(Integer[] codes) {
 
         DashboardConcept territoryConcept = new DashboardConcept();
-        territoryConcept.setId(TERRITORY_CONCEPT);
+        territoryConcept.setId(Utility.CONCEPT_TERRITORY_ID);
 
         List<DashboardVariable> hierarchy = dashboardVariableDao.findByConcept(territoryConcept);
 
@@ -74,7 +76,7 @@ public class TerritoryDao {
         String queryString;
         String whereCondition = "";
 
-        if (codes[0] != TERRITORY_ROOT) {
+        if (Objects.equals(codes[0], Utility.TERRITORY_ROOT)) {
             whereCondition = "WHERE ";
             for (int i = 0; i < codes.length; i++) {
                 if (i == codes.length - 1) { //is last
@@ -83,13 +85,64 @@ public class TerritoryDao {
                     whereCondition += hierarchy.get(i).getName() + " = " + codes[i] + " and ";
                 }
             }
-        } 
+        }
 
         queryString = "SELECT " + fields + " FROM territory " + whereCondition;
 
         Query query = em.createNativeQuery(queryString);
 
         return query.getResultList();
+
+    }
+
+    public List<Object[]> getNonMatchingHousehold() {
+
+        String queryString = "SELECT @FIELDS FROM h_denombrement_quest h NATURAL LEFT JOIN territory WHERE @ROOT_TERRITORY_NAME IS NULL;";
+        String fields = "h.ID";
+        String root_territory_name = "";
+        List<DashboardVariable> hierarchy = getHouseholdTerritoryVariables();
+
+        boolean isFirst = true;
+        for (DashboardVariable variable : hierarchy) {
+            if (isFirst) {
+                root_territory_name = variable.getName() + "_NAME";
+                isFirst = false;
+            }
+            fields += ", " + variable.getName();
+        }
+        queryString = queryString.replace("@FIELDS", fields);
+        queryString = queryString.replace("@ROOT_TERRITORY_NAME", root_territory_name);
+
+        Query query = em.createNativeQuery(queryString);
+
+        return query.getResultList();
+
+    }
+
+    public Integer getNonMatchingHouseholdCount() {
+        BigInteger count;
+        
+        String queryString = "SELECT COUNT(*) FROM h_denombrement_quest h NATURAL LEFT JOIN territory WHERE @ROOT_TERRITORY_NAME IS NULL;";
+        
+        List<DashboardVariable> hierarchy = getHouseholdTerritoryVariables();
+        queryString = queryString.replace("@ROOT_TERRITORY_NAME", hierarchy.get(0).getName() + "_NAME");
+
+        Query query = em.createNativeQuery(queryString);
+
+        count = (BigInteger) query.getSingleResult();
+        
+        return count.intValue();
+        
+    }
+
+    public List<DashboardVariable> getHouseholdTerritoryVariables() {
+        DashboardConcept territoryConcept = new DashboardConcept();
+        territoryConcept.setId(Utility.CONCEPT_TERRITORY_ID);
+        DashboardConcept householdConcept = new DashboardConcept();
+        householdConcept.setId(Utility.CONCEPT_HOUSEHOLD_ID);
+        DashboardUnit householdUnit = dashboardUnitDao.findByConcept(householdConcept).get(0);
+
+        return dashboardVariableDao.findByConceptAndUnit(territoryConcept, householdUnit);
 
     }
 
