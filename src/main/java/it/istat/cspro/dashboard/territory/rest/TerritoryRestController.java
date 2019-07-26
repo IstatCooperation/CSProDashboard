@@ -1,6 +1,6 @@
 package it.istat.cspro.dashboard.territory.rest;
 
-import it.istat.cspro.dashboard.bean.SpatialPoint;
+import it.istat.cspro.dashboard.territory.bean.SpatialPoint;
 import it.istat.cspro.dashboard.territory.service.TerritoryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

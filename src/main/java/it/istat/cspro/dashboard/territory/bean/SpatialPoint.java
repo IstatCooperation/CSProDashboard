@@ -1,4 +1,4 @@
-package it.istat.cspro.dashboard.bean;
+package it.istat.cspro.dashboard.territory.bean;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package it.istat.cspro.dashboard.territory.service;
 
-import it.istat.cspro.dashboard.bean.SpatialPoint;
+import it.istat.cspro.dashboard.territory.bean.SpatialPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

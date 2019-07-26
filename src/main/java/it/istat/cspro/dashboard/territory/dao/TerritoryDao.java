@@ -1,6 +1,6 @@
 package it.istat.cspro.dashboard.territory.dao;
 
-import it.istat.cspro.dashboard.bean.SpatialPoint;
+import it.istat.cspro.dashboard.territory.bean.SpatialPoint;
 import it.istat.cspro.dashboard.dao.DashboardUnitDao;
 import it.istat.cspro.dashboard.dao.DashboardVariableDao;
 import it.istat.cspro.dashboard.domain.DashboardConcept;
@@ -40,7 +40,7 @@ public class TerritoryDao {
         String queryString;
         String whereCondition = "WHERE ";
 
-        if (Objects.equals(codes[0], Utility.TERRITORY_ROOT)) { //root level
+        if (codes[0] == Utility.TERRITORY_ROOT) { //root level
             queryString = "SELECT distinct " + hierarchy.get(0).getName() + "_NAME, " + hierarchy.get(0).getName() + " FROM territory";
         } else {
             for (int i = 0; i < codes.length; i++) {
@@ -55,9 +55,7 @@ public class TerritoryDao {
                     + hierarchy.get(codes.length).getName() + " FROM territory " + whereCondition;
         }
 
-        Query query = em.createNativeQuery(queryString);
-
-        return query.getResultList();
+        return em.createNativeQuery(queryString).getResultList();
 
     }
 
@@ -79,7 +77,7 @@ public class TerritoryDao {
         String queryString;
         String whereCondition = "";
 
-        if (Objects.equals(codes[0], Utility.TERRITORY_ROOT)) {
+        if (codes[0] != Utility.TERRITORY_ROOT) {
             whereCondition = "WHERE ";
             for (int i = 0; i < codes.length; i++) {
                 if (i == codes.length - 1) { //is last
@@ -92,15 +90,17 @@ public class TerritoryDao {
 
         queryString = "SELECT " + fields + " FROM territory " + whereCondition;
 
-        Query query = em.createNativeQuery(queryString);
-
-        return query.getResultList();
+        return em.createNativeQuery(queryString).getResultList();
 
     }
 
     public List<Object[]> getNonMatchingHousehold() {
 
-        String queryString = "SELECT @FIELDS FROM h_denombrement_quest h NATURAL LEFT JOIN territory WHERE @ROOT_TERRITORY_NAME IS NULL;";
+        DashboardConcept householdConcept = new DashboardConcept();
+        householdConcept.setId(Utility.CONCEPT_HOUSEHOLD_ID);
+        DashboardUnit householdUnit = dashboardUnitDao.findByConcept(householdConcept).get(0);
+
+        String queryString = "SELECT @FIELDS FROM " + householdUnit.getTableName() + " h NATURAL LEFT JOIN territory WHERE @ROOT_TERRITORY_NAME IS NULL;";
         String fields = "h.ID";
         String root_territory_name = "";
         List<DashboardVariable> hierarchy = getHouseholdTerritoryVariables();
@@ -124,8 +124,11 @@ public class TerritoryDao {
 
     public Integer getNonMatchingHouseholdCount() {
         BigInteger count;
+        DashboardConcept householdConcept = new DashboardConcept();
+        householdConcept.setId(Utility.CONCEPT_HOUSEHOLD_ID);
+        DashboardUnit householdUnit = dashboardUnitDao.findByConcept(householdConcept).get(0);
 
-        String queryString = "SELECT COUNT(*) FROM h_denombrement_quest h NATURAL LEFT JOIN territory WHERE @ROOT_TERRITORY_NAME IS NULL;";
+        String queryString = "SELECT COUNT(*) FROM " + householdUnit.getTableName() + " h NATURAL LEFT JOIN territory WHERE @ROOT_TERRITORY_NAME IS NULL;";
 
         List<DashboardVariable> hierarchy = getHouseholdTerritoryVariables();
         queryString = queryString.replace("@ROOT_TERRITORY_NAME", hierarchy.get(0).getName() + "_NAME");
@@ -166,23 +169,23 @@ public class TerritoryDao {
     public List<SpatialPoint> getSpatialPoints() {
         List<SpatialPoint> points = new ArrayList<>();
         List<DashboardVariable> variables = getLatitudeLongitudeVariables();
-        
+
         String latitude = "", longitude = "", table = "";
-        if(!variables.isEmpty()){
+        if (!variables.isEmpty()) {
             latitude = variables.get(0).getName();
             longitude = variables.get(1).getName();
-            table = "h_" + variables.get(0).getUnit().getName(); //TO BE FIXED (ADD FIELD TABLE NAME TO UNITS)
+            table = variables.get(0).getUnit().getTableName();
         }
-        
+
         String queryString = "SELECT " + latitude + ", " + longitude + " FROM " + table;
         BigDecimal lat, lon;
         List<Object[]> results = em.createNativeQuery(queryString).getResultList();
-        for(Object[] result: results){
+        for (Object[] result : results) {
             lat = (BigDecimal) result[0];
             lon = (BigDecimal) result[1];
             points.add(new SpatialPoint(lat.doubleValue(), lon.doubleValue()));
         }
-        
+
         return points;
     }
 

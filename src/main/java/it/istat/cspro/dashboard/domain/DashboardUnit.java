@@ -17,8 +17,8 @@ import lombok.Data;
 @Entity
 @Table(name = "DASHBOARD_META_UNIT")
 public class DashboardUnit implements Serializable {
-    
-     private static final long serialVersionUID = 0x5ae011eea5ebf5e6L;
+
+    private static final long serialVersionUID = 0x5ae011eea5ebf5e6L;
 
     @Id
     @Column(name = "ID")
@@ -26,6 +26,9 @@ public class DashboardUnit implements Serializable {
 
     @Column(name = "NAME", length = 100)
     private String name;
+
+    @Column(name = "TABLE_NAME", length = 100)
+    private String tableName;
 
     @Column(name = "NOTE", length = 1000)
     private String note;

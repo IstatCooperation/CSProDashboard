@@ -153,6 +153,9 @@ function getCodes(elementLevel, elementVal) {
 
 function getCodeString() {
     var tmpCode = "";
+    if(codes.length < 1){ //EMPTY ROOT 
+        return "0";
+    }
     for (var i = 0; i < codes.length; i++) {
         tmpCode += codes[i] + ",";
     }
