@@ -80,9 +80,8 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.16</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>        
     </dependencies>
 
@@ -116,7 +115,7 @@
                 <packaging.type>jar</packaging.type>
             </properties>
         </profile>
-         <profile>
+        <profile>
             <id>dashboardWar</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
