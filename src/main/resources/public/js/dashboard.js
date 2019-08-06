@@ -144,7 +144,7 @@ function renderTable(idTable, filters) {
 }
 
 function remove(array, element) {
-    const index = array.indexOf(element);
+    var index = array.indexOf(element);
     array.splice(index, 1);
 }
 
