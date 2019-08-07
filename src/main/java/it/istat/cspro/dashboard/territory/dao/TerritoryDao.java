@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +60,7 @@ public class TerritoryDao {
 
     public List<Object[]> getTerritory(Integer[] codes) {
 
-        DashboardConcept territoryConcept = new DashboardConcept();
-        territoryConcept.setId(Utility.CONCEPT_TERRITORY_ID);
-
-        List<DashboardVariable> hierarchy = dashboardVariableDao.findByConcept(territoryConcept);
+        List<DashboardVariable> hierarchy = getHouseholdTerritoryVariables();
 
         String fields = "";
 
