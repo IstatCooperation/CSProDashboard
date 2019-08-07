@@ -4,8 +4,8 @@
     <head>
         <script th:src="@{/js/chart/jquery.classyloader.min.js}" type="text/javascript"></script>
         <script th:src="@{/js/report/totalHousehold.js}" type="text/javascript"></script>
-        <script th:src="@{/js/chart/chart.bundle.min.js}" type="text/javascript"></script>
-        <script th:src="@{/js/report/sexdistributionList.js}" type="text/javascript"></script>
+        <script th:src="@{/js/plotly/plotly-latest.min.js}" type="text/javascript"></script>
+        <script th:src="@{/js/report/sexdistribution.js}" type="text/javascript"></script>
         <script>
             $(function () {
                 setMenuActive("home");
@@ -48,7 +48,7 @@
                                         <span>Sex distribution</span>
                                     </div>
                                     <div class="card-body">
-                                        <canvas id="bar-chart-area" />
+                                        <div id="chart-area"></div>
                                     </div>
                                 </div>
                             </div>
