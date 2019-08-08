@@ -809,4 +809,16 @@ fieldset {
     width: 15%;
 }
 
-#mapid { height: 670px; }
+#mapid { 
+    height: 670px; 
+}
+
+/*Toggle botton*/
+.toggler{
+    font-size: 1.7em!important;
+    margin-right: 12px;
+    color: #196889;
+}
+.on {
+  color: #3a9d5d;
+}

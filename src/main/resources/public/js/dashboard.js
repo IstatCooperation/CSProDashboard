@@ -115,7 +115,7 @@ function renderTable(idTable, filters) {
     if (filters === undefined || filters.length === 0) {
         buildFilters = false;
     }
-    
+
     var table = $('#' + idTable).DataTable({
         responsive: true,
         autowidth: false,
@@ -157,7 +157,7 @@ function removeElements(array, elements) {
     }
 }
 
-function writeClientMsg(msg){
+function writeClientMsg(msg) {
     $("#messages-client-msg").text(msg);
     $("#messages-client-container").fadeIn();
 }

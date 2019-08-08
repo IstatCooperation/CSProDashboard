@@ -3,8 +3,8 @@
 
     <head th:replace="layout :: site-head"/>
     <head>
-        <script th:src="@{/js/plotly/plotly-latest.min.js}" type="text/javascript"></script>
-        <!--script th:src="@{/js/report/chart.js}" type="text/javascript"></script-->
+        <script th:src="@{/js/plotly/plotly.min.js}" type="text/javascript"></script>
+        <script th:src="@{/js/report/chart.js}" type="text/javascript"></script>
         <script th:src="@{/js/report/sexdistribution.js}" type="text/javascript"></script>
         <script>
             $(function () {
@@ -33,7 +33,9 @@
                                     <div class="panel-heading">
                                         Sex distribution
                                     </div>
-                                    <div id="chart-area"></div>
+                                      <div class="panel-body" style="padding-top: 0px;">
+                                        <div id="chart-area"></div>
+                                    </div>
                                 </div>
                             </div>    
                         </div>

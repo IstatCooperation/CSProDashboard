@@ -1,8 +1,3 @@
-var _ctx = $("meta[name='ctx']").attr("content");
-
-var removebtns = ['lasso2d', 'hoverClosestCartesian', 'hoverCompareCartesian', 'toggleSpikelines', 'select2d', 'pan2d', 'zoom2d', 'zoomIn2d', 'zoomOut2d'];
-var globalOptions = {scrollZoom: true, staticPlot: false, displaylogo: false, responsive: true, modeBarButtonsToRemove: removebtns};
-
 var arrLabel = [];
 var arrDataMale = [];
 var arrDataFemale = [];
@@ -22,7 +17,7 @@ $(document).ready(function () {
 
 function drawBar() {
 
-    var maleBox = {
+    var maleSet = {
         x: arrLabel,
         y: arrDataMale,
         name: 'Male',
@@ -35,7 +30,7 @@ function drawBar() {
         }
     };
 
-    var femaleBox = {
+    var femaleSet = {
         x: arrLabel,
         y: arrDataFemale,
         name: 'Female',
@@ -48,7 +43,7 @@ function drawBar() {
         }
     };
 
-    var globalBox = [maleBox, femaleBox];
+    var globalSet = [maleSet, femaleSet];
 
     var layout = {
         title: 'Sex distribution',
@@ -81,7 +76,7 @@ function drawBar() {
         }
     };
 
-    Plotly.newPlot('chart-area', globalBox, layout, globalOptions);
+    Plotly.newPlot('chart-area', globalSet, layout, globalOptions);
 
 }
 
