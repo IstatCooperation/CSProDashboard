@@ -330,6 +330,37 @@ aside.toggle-off .active {
     margin-bottom: 0px;
     background-color: #fafbfc;
 }
+
+
+.breadcrumb .bar-right{
+    padding-right: 5px;
+    border-right: 1px solid #ccc;
+}
+
+.breadcrumb li {
+    font-size: 14px !important;
+}
+
+.breadcrumb a{
+    color: #155873!important;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.breadcrumb a:hover{
+    text-decoration: none;
+}
+
+.breadcrumb-item a{
+    color: #196889!important;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.breadcrumb-last-item{
+    margin-right: 3px;
+}
+
 /* START FOOTER */
 .wrapper>footer, .wrapper>section {
     margin-left: 240px;
@@ -364,7 +395,7 @@ footer img{
 }
 .widget.panel, .widget .panel {
     overflow: hidden;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 .row-table {
     display: table;
@@ -385,8 +416,15 @@ footer img{
     font-weight: 500;
 }
 .widget-content {
-    padding-bottom: 15px!important;
+    padding-bottom: 10px!important;
 }
+
+.widget-content .content{
+    font-size: 24px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
 .bg-blue {
     background-color: #2189b4;
     color: #fff!important;
@@ -763,11 +801,15 @@ fieldset {
 
 .well-app {
     font-size: 16px;
-    margin-top: 10px !important;
+    margin-top: 5px !important;
     background-color: #fff !important;
     color: #155873 !important;
-    padding: 15px;
+    padding: 10px 15px;
     border:1px solid #c8ced3;
+}
+
+.well-app p{
+    margin: 0 0 6px 6px;
 }
 
 #error-panel{

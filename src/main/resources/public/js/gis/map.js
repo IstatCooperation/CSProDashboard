@@ -29,7 +29,7 @@ $(function () {
 
     setCountry(map);
     setRegion(map);
-    setMarkers(map);
+    //setMarkers(map);
 
 });
 

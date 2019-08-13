@@ -4,8 +4,6 @@
     <head th:replace="layout :: site-head"/>
     <head>
         <script th:src="@{/js/chart/jquery.classyloader.min.js}" type="text/javascript"></script>
-        <script th:src="@{/js/plotly/plotly.min.js}" type="text/javascript"></script>
-        <script th:src="@{/js/report/chart.js}" type="text/javascript"></script>
         <script th:src="@{/js/report/totalEa.js}"></script>
     </head>
 
@@ -17,11 +15,13 @@
                 <div class="content-wrapper">
                     <div class="content-heading">
                         <ol class="breadcrumb">
-                            <li>Progress report </li>
+                            <li>Report </li>
                             <li>Eas by COUNTRY</li>
 
                             <div class="btn-group pull-right" role="group">
-                                <i class="fa fa-toggle-on fa-rotate-180 toggler"></i>
+                                <a class="breadcrumb-last-item" title="Close progress report" th:href="@{'/report/progress/totalEa/'}">
+                                    <i class="fa fa-line-chart"></i>&nbsp;<span>Progress</span>
+                                </a>
                             </div>
                         </ol>
                     </div>
@@ -42,8 +42,8 @@
                                             <em class="fa fa-briefcase fa-3x"></em>
                                         </div>
                                         <div class="col-xs-8 widget-content">
-                                            <div class="h2 mt0" id="eaFieldwork"></div>
-                                            <div class="text-uppercase">Field Work</div>
+                                            <div class="content" id="eaFieldwork"></div>
+                                            <div class="text-uppercase">Enumeration</div>
                                         </div>
                                     </div>
                                 </div>
@@ -55,8 +55,8 @@
                                             <em class="fa fa-file-text-o fa-3x"></em>
                                         </div>
                                         <div class="col-xs-8 widget-content">
-                                            <div class="h2 mt0" id="eaFreshlist"></div>
-                                            <div class="text-uppercase">Freshlist</div>
+                                            <div class="content" id="eaFreshlist"></div>
+                                            <div class="text-uppercase">Listing</div>
                                         </div>
                                     </div>
                                 </div>
@@ -68,8 +68,8 @@
                                             <em class="fa fa-hourglass-end fa-3x"></em>
                                         </div>
                                         <div class="col-xs-8 widget-content">
-                                            <div class="h2 mt0" id="eaExpected"></div>
-                                            <div class="text-uppercase">Expected</div>
+                                            <div class="content" id="eaExpected"></div>
+                                            <div class="text-uppercase">Mapping</div>
                                         </div>
                                     </div>
                                 </div>
@@ -78,56 +78,40 @@
                         <div class="row" id="row-widget">
                             <!-- START WIDGET -->
                             <div class="col-lg-3" th:if="${dashboardInfo.listing}">
-                                <div class="panel panel-default">
-                                    <div class="panel-body text-center">
-                                        <div class="text-info">Field Work / Freshlist</div>
-                                        <canvas class="fieldworkFreshlist"></canvas>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span>Coverage</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas class="fieldworkFreshlist"></canvas>           
                                     </div>
                                 </div>
                             </div>
                             <!-- END WIDGET -->
                             <!-- START WIDGET -->
                             <div class="col-lg-3" th:if="${dashboardInfo.expected}">
-                                <div class="panel panel-default">
-                                    <div class="panel-body text-center">
-                                        <div class="text-info">Field Work / Expected</div>
-                                        <canvas class="fieldworkExpected"></canvas>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span>Field Work / Expected</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas class="fieldworkExpected"></canvas>           
                                     </div>
                                 </div>
                             </div>
                             <!-- END WIDGET -->
                             <!-- START WIDGET -->
                             <div class="col-lg-3" th:if="${dashboardInfo.expected}">
-                                <div class="panel panel-default">
-                                    <div class="panel-body text-center">
-                                        <div class="text-info">Freshlist / Expected</div>
-                                        <canvas class="freshlistExpected"></canvas>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span>Freshlist / Expected</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas class="freshlistExpected"></canvas>           
                                     </div>
                                 </div>
                             </div>
                             <!-- END WIDGET -->
-                        </div>
-                        <div class="row" id="row-chart" style="display: none">
-                            <div class="col-lg-6" >
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Total EA
-                                    </div>
-                                    <div class="panel-body" style="padding-top: 0px;">
-                                        <div id="line-chart-area"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6" >
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Daily EA
-                                    </div>
-                                    <div class="panel-body" style="padding-top: 0px;">
-                                        <div id="bar-chart-area"></div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

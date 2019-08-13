@@ -12,6 +12,11 @@ public class ReportController extends BaseController {
     public String reportPage(@PathVariable("reportPage") String reportPage) {
         return "report/" + reportPage;
     }
+    
+    @RequestMapping(value = "/report/progress/{reportPage}")
+    public String progressReportPage(@PathVariable("reportPage") String reportPage) {
+        return "report/progress/" + reportPage;
+    }
 
     @RequestMapping(value = "/report/household/{reportType}")
     public String reportHouseholdPage(@PathVariable("reportType") String reportType) {
