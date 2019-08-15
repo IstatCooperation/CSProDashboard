@@ -108,23 +108,3 @@ function setMarkers(map) {
         }
     });
 }
-
-function loadLocalMap(map) {
-    var regionStyle = {
-        color: "#ff7800",
-        weight: 0,
-        opacity: 0.5
-    };
-
-    $.ajax({
-        dataType: "json",
-        url: 'Homabay_Subloc.json',
-        success: function (data) {
-            var regionLayer = L.geoJSON(data, {
-                style: regionStyle
-            });
-            regionLayer.addTo(map);
-        }
-    });
-
-}
