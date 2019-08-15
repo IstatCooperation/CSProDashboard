@@ -179,7 +179,10 @@ public class TerritoryDao {
         for (Object[] result : results) {
             lat = (BigDecimal) result[0];
             lon = (BigDecimal) result[1];
-            points.add(new SpatialPoint(lat.doubleValue(), lon.doubleValue()));
+            if(lat != null && lon != null){
+                points.add(new SpatialPoint(lat.doubleValue(), lon.doubleValue()));
+            }
+            
         }
 
         return points;

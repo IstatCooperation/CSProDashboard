@@ -51,7 +51,7 @@
                                             <tbody>
                                                 <tr th:each="report : ${dashBoardreports}" th:if="${(report.type.name == 'progress')}">
                                                     <td th:text="${report.id}"></td>
-                                                    <td th:text="${report.name}"></td>
+                                                    <td th:text="${report.name.replace('Households by R_HOUSEHOLD_EXPECTED_BY_','')}"></td>
                                                     <td th:text="${report.tableName}"></td>
                                                     <td th:text="${report.isVisible}? YES : NO"></td>
                                                     <td th:text="${report.type.name}"></td>

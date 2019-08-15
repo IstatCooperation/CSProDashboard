@@ -27,6 +27,8 @@ function drawLine() {
             size: 18,
             color: '#5f5f5f'
         },
+        autosize: true,
+        height: 300,
         showlegend: true,
         xaxis: {
             //tickformat: '%Y/%m/%d',
@@ -77,6 +79,8 @@ function drawBar() {
             size: 18,
             color: '#5f5f5f'
         },
+        autosize: true,
+        height: 300,
         showlegend: true,
         xaxis: {
             //tickformat: '%Y/%m/%d',

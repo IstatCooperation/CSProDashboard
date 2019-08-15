@@ -29,55 +29,12 @@
 
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-lg-6 col-sm-12">
-                                <div class="well well-app" style="background-color: #fafbfc">
-                                    <p>
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                        <span>CSPro Dashboard</span>
-                                    </p>
-                                    <p style="padding-left: 8px;">
-                                        <span>Welcome</span>
-                                        <strong><span sec:authentication="principal.firstname"></span></strong>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-12">
-                                <div class="panel widget bg-blue">
-                                    <div class="row row-table">
-                                        <div class="col-xs-4 text-center bg-blue-dark ">
-                                            <em class="fa fa-briefcase fa-3x"></em>
-                                        </div>
-                                        <div class="col-xs-8 widget-content">
-                                            <div class="content" id="householdFieldwork"></div>
-                                            <div class="text-uppercase">Enumeration</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6" th:if="${dashboardInfo.listing}">
-                                <div class="panel widget bg-blue">
-                                    <div class="row row-table">
-                                        <div class="col-xs-4 text-center bg-blue-dark pv-lg">
-                                            <em class="fa fa-file-text-o fa-3x"></em>
-                                        </div>
-                                        <div class="col-xs-8 widget-content">
-                                            <div class="content" id="householdFreshlist"></div>
-                                            <div class="text-uppercase">Listing</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-lg-9">
                                 <div class="card">
                                     <div class="card-header">
                                         <span>Map</span>
                                         <div class="card-header-actions">
-                                            <a class="card-header-action" href="javascript:void(0)" onclick="javascript:reset();" title="Clear filters"> 
+                                            <a class="card-header-action" href="javascript:void(0)" onclick="javascript:reset('');" title="Clear filters"> 
                                                 <i class="fa fa-refresh"></i>
                                                 <span>Reload</span>
                                             </a>
@@ -88,12 +45,34 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 col-sm-12">
+                                <div class="panel widget bg-blue">
+                                    <div class="row row-table">
+                                        <div class="col-xs-4 text-center bg-blue-dark ">
+                                            <em class="fa fa-tablet fa-3x"></em>
+                                        </div>
+                                        <div class="col-xs-8 widget-content">
+                                            <div class="content" id="householdFieldwork"></div>
+                                            <div class="text-uppercase">Enumeration</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel widget bg-blue">
+                                    <div class="row row-table">
+                                        <div class="col-xs-4 text-center bg-blue-dark pv-lg">
+                                            <em class="fa fa-bars fa-3x"></em>
+                                        </div>
+                                        <div class="col-xs-8 widget-content">
+                                            <div class="content" id="householdFreshlist"></div>
+                                            <div class="text-uppercase">Listing</div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card" th:if="${dashboardInfo.listing}">
                                     <div class="card-header">
                                         <span>Coverage</span>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body" style="text-align: center;">
                                         <canvas class="fieldworkFreshlist"></canvas>           
                                     </div>
                                 </div>

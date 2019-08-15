@@ -39,10 +39,10 @@ function populate(url, tableId) {
             for (var i in json[0].splitted) {
                 columnsSet.push({title: json[0].splitted[i]});
             }
-            columnsSet[columnsSet.length - 6] = {title: 'Field Work', render: $.fn.dataTable.render.number(',', '.', 0), 'className': 'numeric'};
-            columnsSet[columnsSet.length - 5] = {title: 'Freshlist', render: $.fn.dataTable.render.number(',', '.', 0), 'className': 'numeric'};
-            columnsSet[columnsSet.length - 4] = {title: 'Expected', render: $.fn.dataTable.render.number(',', '.', 0), 'className': 'numeric'};
-            columnsSet[columnsSet.length - 3] = {title: 'Field/List', render: $.fn.dataTable.render.number(',', '.', 1), 'className': 'numeric'};
+            columnsSet[columnsSet.length - 6] = {title: 'Enumeration', render: $.fn.dataTable.render.number(',', '.', 0), 'className': 'numeric'};
+            columnsSet[columnsSet.length - 5] = {title: 'Listing', render: $.fn.dataTable.render.number(',', '.', 0), 'className': 'numeric'};
+            columnsSet[columnsSet.length - 4] = {title: 'Mapping', render: $.fn.dataTable.render.number(',', '.', 0), 'className': 'numeric'};
+            columnsSet[columnsSet.length - 3] = {title: 'Coverage', render: $.fn.dataTable.render.number(',', '.', 1), 'className': 'numeric'};
             columnsSet[columnsSet.length - 2] = {title: 'Field/Exp', render: $.fn.dataTable.render.number(',', '.', 1), 'className': 'numeric'};
             columnsSet[columnsSet.length - 1] = {title: 'List/Exp', render: $.fn.dataTable.render.number(',', '.', 1), 'className': 'numeric'};
             clean(columnsSet);

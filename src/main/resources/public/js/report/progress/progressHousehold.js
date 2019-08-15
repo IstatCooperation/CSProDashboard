@@ -1,9 +1,9 @@
 $(function () {
 
     setMenuActive("report-total-household");
-    
+
     drawLine();
-    drawBar();   
+    drawBar();
 });
 
 
@@ -29,7 +29,9 @@ function drawLine() {
             size: 18,
             color: '#5f5f5f'
         },
-        showlegend: true,
+        autosize: true,
+        height: 300,
+        showlegend: false,
         xaxis: {
             //tickformat: '%Y/%m/%d',
             title: {
@@ -79,7 +81,9 @@ function drawBar() {
             size: 18,
             color: '#5f5f5f'
         },
-        showlegend: true,
+        autosize: true,
+        height: 300,
+        showlegend: false,
         xaxis: {
             //tickformat: '%Y/%m/%d',
             title: {

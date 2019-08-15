@@ -22,7 +22,7 @@
                     <div class="content-heading">
                         <ol class="breadcrumb">
                             <li>Report </li>
-                            <li>Households by COUNTRY</li>
+                            <li>Total Households</li>
 
                             <div class="btn-group pull-right" role="group">
                                 <a class="breadcrumb-last-item" title="Close progress report" th:href="@{'/report/progress/totalHousehold/'}">
@@ -38,72 +38,75 @@
                                 <div class="panel widget bg-blue">
                                     <div class="row row-table">
                                         <div class="col-xs-4 text-center bg-blue-dark ">
-                                            <em class="fa fa-briefcase fa-3x"></em>
+                                            <em class="fa fa-tablet fa-3x"></em>
                                         </div>
                                         <div class="col-xs-8 widget-content">
                                             <div class="h2 mt0" id="householdFieldwork"></div>
-                                            <div class="text-uppercase">Field Work</div>
+                                            <div class="text-uppercase">Enumeration</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-3 col-sm-6" th:if="${dashboardInfo.listing}">
                                 <div class="panel widget bg-blue">
                                     <div class="row row-table">
                                         <div class="col-xs-4 text-center bg-blue-dark pv-lg">
-                                            <em class="fa fa-file-text-o fa-3x"></em>
+                                            <em class="fa fa-bars fa-3x"></em>
                                         </div>
                                         <div class="col-xs-8 widget-content">
                                             <div class="h2 mt0" id="householdFreshlist"></div>
-                                            <div class="text-uppercase">Freshlist</div>
+                                            <div class="text-uppercase">Listing</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-3 col-sm-6" th:if="${dashboardInfo.expected}">
                                 <div class="panel widget bg-blue">
                                     <div class="row row-table">
                                         <div class="col-xs-4 text-center bg-blue-dark pv-lg">
-                                            <em class="fa fa-hourglass-end fa-3x"></em>
+                                            <em class="fa fa-map-o fa-3x"></em>
                                         </div>
                                         <div class="col-xs-8 widget-content">
                                             <div class="h2 mt0" id="householdExpected"></div>
-                                            <div class="text-uppercase">Expected</div>
+                                            <div class="text-uppercase">Mapping</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row" id="row-widget">
                             <!-- START WIDGET -->
                             <div class="col-lg-3" th:if="${dashboardInfo.listing}">
-                                <div class="panel panel-default">
-                                    <div class="panel-body text-center">
-                                        <div class="text-info">Field Work / Freshlist</div>
-                                        <canvas class="fieldworkFreshlist"></canvas>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span>Coverage</span>
+                                    </div>
+                                    <div class="card-body" style="text-align: center;">
+                                        <canvas class="fieldworkFreshlist"></canvas>           
                                     </div>
                                 </div>
                             </div>
                             <!-- END WIDGET -->
                             <!-- START WIDGET -->
                             <div class="col-lg-3" th:if="${dashboardInfo.expected}">
-                                <div class="panel panel-default">
-                                    <div class="panel-body text-center">
-                                        <div class="text-info">Field Work / Expected</div>
-                                        <canvas class="fieldworkExpected"></canvas>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span>Field Work / Expected</span>
+                                    </div>
+                                    <div class="card-body" style="text-align: center;">
+                                        <canvas class="fieldworkExpected"></canvas>           
                                     </div>
                                 </div>
                             </div>
                             <!-- END WIDGET -->
                             <!-- START WIDGET -->
-                            <div class="col-lg-3" th:if="${dashboardInfo.listing &amp;&amp; dashboardInfo.expected}">
-                                <div class="panel panel-default">
-                                    <div class="panel-body text-center">
-                                        <div class="text-info">Freshlist / Expected</div>
-                                        <canvas class="freshlistExpected"></canvas>
+                            <div class="col-lg-3" th:if="${dashboardInfo.expected}">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span>Freshlist / Expected</span>
+                                    </div>
+                                    <div class="card-body" style="text-align: center;">
+                                        <canvas class="freshlistExpected"></canvas>           
                                     </div>
                                 </div>
                             </div>

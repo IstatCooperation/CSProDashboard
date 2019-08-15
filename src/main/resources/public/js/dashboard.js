@@ -34,6 +34,11 @@ function toggleMenu(load) {
 }
 
 function format(n) {
+    
+    if(n === undefined || n === null){
+        return "";
+    }
+    
     if (Math.round(n) === n) {
         return ("" + n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }

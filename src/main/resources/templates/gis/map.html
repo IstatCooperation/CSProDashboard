@@ -9,6 +9,11 @@
         <script th:src="@{/js/leaflet/leaflet.js}"></script>
         <script th:src="@{/js/leaflet/leaflet.markercluster.js}"></script>
         <script th:src="@{/js/gis/map.js}"></script>
+         <script>
+            $(function () {
+                setMenuActive("map");
+            });
+        </script>
     </head>
 
     <body>
@@ -30,7 +35,7 @@
                                     <div class="card-header">
                                         <span>Map</span>
                                         <div class="card-header-actions">
-                                            <a class="card-header-action" href="javascript:void(0)" onclick="javascript:reset();" title="Clear filters"> 
+                                            <a class="card-header-action" href="javascript:void(0)" onclick="javascript:reset('/gis/map');" title="Clear filters"> 
                                                 <i class="fa fa-refresh"></i>
                                                 <span>Reload</span>
                                             </a>

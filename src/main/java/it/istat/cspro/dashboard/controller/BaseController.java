@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class BaseController {
 
     private static final Pattern HOUSEHOLD_BY_PATTERN = Pattern.compile("^r_household_expected_by_(.*)$");
+    private static final String HOUSEHOLD_PREFIX = "Households by R_HOUSEHOLD_EXPECTED_BY_";
     private static final Integer REPORT_PROGRESS = 1;
     private static final Integer REPORT_ANALYSIS = 2;
     private static final Integer REPORT_GIS = 3;
@@ -60,7 +61,7 @@ public class BaseController {
         for (DashboardReport r : service.getReports()) {
             if (r.getType().getId() == REPORT_PROGRESS) {
                 report = new ReportBean();
-                report.setName(r.getName());
+                report.setName(r.getName().replace(HOUSEHOLD_PREFIX, ""));
                 Matcher m = HOUSEHOLD_BY_PATTERN.matcher(r.getTableName());
                 if (m.find()) {
                     report.setTableName(m.group(1));

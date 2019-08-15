@@ -1,15 +1,16 @@
+var country = "Kenya";
+var region = "";
+
 $(function () {
 
-    setMenuActive("map");
-
     var map = L.map('map-container', {
-        center: [7.4608454, -7.7917077],
-        zoom: 8
+        center: [-0.022, 37.749],
+        zoom: 5
     });
 
     var resize = function () {
         var $map = $('#map-container');
-        $map.height($(window).height() - 300);
+        $map.height($(window).height() - 240);
         if (map) {
             map.invalidateSize();
         }
@@ -27,14 +28,20 @@ $(function () {
 
     baseLayer.addTo(map);
 
-    setCountry(map);
-    setRegion(map);
-    //setMarkers(map);
+    if (country !== "") {
+        setCountry(map);
+    }
+
+    if (region !== "") {
+        setRegion(map);
+    }
+
+    setMarkers(map);
 
 });
 
-function reset() {
-    window.location = ctx + "/gis/map";
+function reset(page) {
+    window.location = ctx + page;
 }
 
 function setCountry(map) {
@@ -47,7 +54,7 @@ function setCountry(map) {
 
     $.ajax({
         dataType: "json",
-        url: 'https://nominatim.openstreetmap.org/search?country=cote%20d%27ivoire&polygon_geojson=1&format=geojson',
+        url: 'https://nominatim.openstreetmap.org/search?country=' + country + '&polygon_geojson=1&format=geojson',
         success: function (data) {
             var countryLayer = L.geoJSON(data, {
                 style: countryStyle
@@ -69,7 +76,7 @@ function setRegion(map) {
 
     $.ajax({
         dataType: "json",
-        url: 'https://nominatim.openstreetmap.org/search?q=montagnes,cote%20d%27ivoire&polygon_geojson=1&format=geojson',
+        url: 'https://nominatim.openstreetmap.org/search?q=' + region + ',' + country + '&polygon_geojson=1&format=geojson',
         success: function (data) {
             var regionLayer = L.geoJSON(data, {
                 style: regionStyle
@@ -80,7 +87,7 @@ function setRegion(map) {
 }
 
 function setMarkers(map) {
-    
+
     var markerStyle = {
         color: "#196889",
         weight: 0,
@@ -100,4 +107,24 @@ function setMarkers(map) {
             map.addLayer(markers);
         }
     });
+}
+
+function loadLocalMap(map) {
+    var regionStyle = {
+        color: "#ff7800",
+        weight: 0,
+        opacity: 0.5
+    };
+
+    $.ajax({
+        dataType: "json",
+        url: 'Homabay_Subloc.json',
+        success: function (data) {
+            var regionLayer = L.geoJSON(data, {
+                style: regionStyle
+            });
+            regionLayer.addTo(map);
+        }
+    });
+
 }

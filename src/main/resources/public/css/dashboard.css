@@ -361,6 +361,10 @@ aside.toggle-off .active {
     margin-right: 3px;
 }
 
+.breadcrumb-inner-item{
+    margin-left: 0px!important;
+}
+
 /* START FOOTER */
 .wrapper>footer, .wrapper>section {
     margin-left: 240px;
@@ -851,7 +855,7 @@ fieldset {
     width: 15%;
 }
 
-#mapid { 
+#map-container{ 
     height: 670px; 
 }
 

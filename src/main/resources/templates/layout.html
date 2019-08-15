@@ -137,13 +137,13 @@
                                     </a>
                                     <ul id="process" class="nav sidebar-subnav collapse" aria-expanded="false">
                                         <li id="report-total-ea" th:if="${reports.contains('r_total')}">
-                                            <a title="EAs by COUNTRY" th:href="@{/report/totalEa}">
-                                                <span>EAs by COUNTRY</span>
+                                            <a title="Total EAs" th:href="@{/report/totalEa}">
+                                                <span>Total EAs</span>
                                             </a>
                                         </li>
                                         <li id="report-total-household" th:if="${reports.contains('r_total')}">
-                                            <a title="Households by COUNTRY" th:href="@{/report/totalHousehold}">
-                                                <span>Households by COUNTRY</span>
+                                            <a title="Total Households" th:href="@{/report/totalHousehold}">
+                                                <span>Total Households</span>
                                             </a>
                                         </li>
                                         <li th:id="${'report-household-' + rep.tableName}" th:each="rep : ${householdReports}">
@@ -158,17 +158,17 @@
                                     </a>
                                     <ul id="analysis" class="nav sidebar-subnav collapse" aria-expanded="false">
                                         <li id="report-population" th:if="${rep.tableName == 'r_individual_info' and rep.visible}" th:each="rep : ${analysisReports}">
-                                            <a title="Population" th:href="@{/report/population}">
+                                            <a title="Population" th:href="@{/analysis/population}">
                                                 <span>Population</span>
                                             </a>
                                         </li>
                                         <li id="report-questionnaire" th:if="${rep.tableName == 'r_questionnaire_info' and rep.visible}" th:each="rep : ${analysisReports}">
-                                            <a title="Household" th:href="@{/report/questionnaire}">
+                                            <a title="Household" th:href="@{/analysis/questionnaire}">
                                                 <span>Households</span>
                                             </a>
                                         </li>
                                         <li id="report-sexdistribution" th:if="${rep.tableName == 'r_sex_by_age' and rep.visible}" th:each="rep : ${analysisReports}">
-                                            <a title="Sex Distribution" th:href="@{/report/sexdistribution}">
+                                            <a title="Sex Distribution" th:href="@{/analysis/sexdistribution}">
                                                 <span>Sex Distribution</span>
                                             </a>
                                         </li>
