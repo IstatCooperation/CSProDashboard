@@ -38,9 +38,19 @@ public class Utility {
     public static final Integer CONCEPT_LATITUDE_ID = 9;
     public static final Integer CONCEPT_LONGITUDE_ID = 10;
     public static final Integer CONCEPT_EXPECTED_QUEST_ID = 11;
-    
+
     public static final Integer TERRITORY_ROOT = 0;
-    
+
+    //cspro2sql report types
+    public static final Integer REPORT_PROGRESS_ID = 1;
+    public static final Integer REPORT_ANALYSIS_ID = 2;
+    public static final Integer REPORT_GIS_ID = 3;
+    public static final Integer REPORT_AUX_ID = 4;
+
+    //cspro2sql report tables
+    public static final String TABLE_PREFIX_MATERIALIZED = "m";
+    public static final String TABLE_PREFIX_PROGRESS = "t";
+
     public static final Map<Integer, String> conceptMap = getConcepts();
 
     private static Map<Integer, String> getConcepts() {

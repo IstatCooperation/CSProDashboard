@@ -1,9 +1,12 @@
 package it.istat.cspro.dashboard.territory.dao;
 
+import it.istat.cspro.dashboard.dao.DashboardReportDao;
 import it.istat.cspro.dashboard.territory.bean.SpatialPoint;
 import it.istat.cspro.dashboard.dao.DashboardUnitDao;
 import it.istat.cspro.dashboard.dao.DashboardVariableDao;
 import it.istat.cspro.dashboard.domain.DashboardConcept;
+import it.istat.cspro.dashboard.domain.DashboardReport;
+import it.istat.cspro.dashboard.domain.DashboardReportType;
 import it.istat.cspro.dashboard.domain.DashboardUnit;
 import it.istat.cspro.dashboard.domain.DashboardVariable;
 import it.istat.cspro.dashboard.utils.Utility;
@@ -28,6 +31,9 @@ public class TerritoryDao {
 
     @Autowired
     DashboardUnitDao dashboardUnitDao;
+
+    @Autowired
+    DashboardReportDao dashboardReportDao;
 
     @Autowired
     private EntityManager em;
@@ -179,13 +185,29 @@ public class TerritoryDao {
         for (Object[] result : results) {
             lat = (BigDecimal) result[0];
             lon = (BigDecimal) result[1];
-            if(lat != null && lon != null){
+            if (lat != null && lon != null) {
                 points.add(new SpatialPoint(lat.doubleValue(), lon.doubleValue()));
             }
-            
+
         }
 
         return points;
+    }
+
+    public List<Object[]> getRootCoverage() {
+        DashboardReportType reportType = new DashboardReportType();
+        reportType.setId(Utility.REPORT_PROGRESS_ID);
+        List<DashboardReport> reports = dashboardReportDao.findByTypeOrderByTerritoryLevel(reportType);
+
+        String queryString;
+        if (reports != null && !reports.isEmpty()) {
+            queryString = "SELECT name, field_freshlist FROM " + Utility.TABLE_PREFIX_MATERIALIZED + reports.get(0).getTableName() //get root territory
+                    + " where field_freshlist is not null";
+            Query query = em.createNativeQuery(queryString);
+            return query.getResultList();
+        }
+
+        return null;
     }
 
 }

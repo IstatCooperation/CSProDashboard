@@ -138,17 +138,23 @@
                                     <ul id="process" class="nav sidebar-subnav collapse" aria-expanded="false">
                                         <li id="report-total-ea" th:if="${reports.contains('r_total')}">
                                             <a title="Total EAs" th:href="@{/report/totalEa}">
-                                                <span>Total EAs</span>
+                                                <span>Total EA</span>
                                             </a>
                                         </li>
                                         <li id="report-total-household" th:if="${reports.contains('r_total')}">
                                             <a title="Total Households" th:href="@{/report/totalHousehold}">
-                                                <span>Total Households</span>
+                                                <span>Total Household</span>
                                             </a>
                                         </li>
                                         <li th:id="${'report-household-' + rep.tableName}" th:each="rep : ${householdReports}">
                                             <a th:if="${rep.visible}" th:title="${rep.name}" th:href="@{/report/household/} + ${rep.tableName}" th:text="${rep.name}"></a>
                                         </li>
+                                        <li id="report-search-household">
+                                            <a title="Search Households" th:href="@{/report/household/search}">
+                                                <i class="fa fa-search"></i><span>Search EA</span>
+                                            </a>
+                                        </li>
+                                        
                                     </ul>
                                 </li>
                                 <li class="nav-body" sec:authorize="hasRole('ADMIN') || hasRole('ANALYST')">
@@ -188,7 +194,7 @@
                                         </li>
                                         <li id="map">
                                             <a title="Maps" th:href="@{/gis/map}" th:if="${rep.id == 2 and rep.visible}" th:each="rep : ${gisReports}">
-                                                <span>Maps</span>
+                                                <span>Map</span>
                                             </a>
                                         </li>
                                     </ul>

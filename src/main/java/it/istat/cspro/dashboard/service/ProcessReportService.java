@@ -19,5 +19,13 @@ public class ProcessReportService {
     public List<RHouseholdExpectedBase> getHouseholdExpectedBy(String table) {
         return rHouseholdExpectedDao.getExpectedReportBy(table);
     }
+    
+    public List<RHouseholdExpectedBase> getFilteredExpectedReportBy(Integer[] codes) {
+        return rHouseholdExpectedDao.getFilteredExpectedReportBy(codes);
+    }
+    
+    public List<RHouseholdExpectedBase> getEaExpectedReportBy(Integer[] codes) {
+        return rHouseholdExpectedDao.getEaExpectedReportBy(codes);
+    }
 
 }

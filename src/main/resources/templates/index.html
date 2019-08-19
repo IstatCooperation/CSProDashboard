@@ -27,6 +27,9 @@
                     <div class="content-heading">
                         <ol class="breadcrumb">
                             <li>Home</li>
+                            <div class="btn-group pull-right" role="group" style="padding-right: 10px;">
+                                <span>Last update:</span>&nbsp;<span th:text="${#dates.format(dashboardStatus.lastUpdate, 'dd/MM/yyyy HH:mm')}"></span>
+                            </div>
                         </ol>
                     </div>
 

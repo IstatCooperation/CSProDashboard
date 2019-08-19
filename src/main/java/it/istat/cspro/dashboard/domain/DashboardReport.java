@@ -35,6 +35,9 @@ public class DashboardReport implements Serializable {
 
     @Column(name = "LIST_ORDER")
     private int order;
+    
+    @Column(name = "TERRITORY_LEVEL")
+    private Integer territoryLevel;
 
     @Column(name = "IS_VISIBLE")
     private int isVisible;

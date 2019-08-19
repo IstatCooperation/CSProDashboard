@@ -11,6 +11,7 @@ public class HomeController extends BaseController {
 
     @RequestMapping("/")
     public String home(Model model, @AuthenticationPrincipal User user) {
+        
         return "index";
     }
 

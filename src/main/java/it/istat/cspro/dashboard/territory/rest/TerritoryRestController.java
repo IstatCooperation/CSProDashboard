@@ -50,4 +50,14 @@ public class TerritoryRestController {
 
         return points;
     }
+    
+    @RequestMapping(value = "/rest/territory/coverage/root")
+    public List<Object[]> getRootCoverage() {
+
+        List<Object[]> rootCoverage = territoryService.getRootCoverage();
+
+        return rootCoverage;
+    }
+
+    
 }

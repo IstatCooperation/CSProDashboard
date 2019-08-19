@@ -18,7 +18,6 @@ public class ReportController extends BaseController {
         return "analysis/" + reportPage;
     }
     
-    
     @RequestMapping(value = "/report/progress/{reportPage}")
     public String progressReportPage(@PathVariable("reportPage") String reportPage) {
         return "report/progress/" + reportPage;
@@ -27,6 +26,11 @@ public class ReportController extends BaseController {
     @RequestMapping(value = "/report/household/{reportType}")
     public String reportHouseholdPage(@PathVariable("reportType") String reportType) {
         return "report/household";
+    }
+    
+    @RequestMapping(value = "/report/household/search")
+    public String reportHouseholdSearchPage() {
+        return "report/householdSearch";
     }
 
     @RequestMapping(value = "/gis/{gisPage}")

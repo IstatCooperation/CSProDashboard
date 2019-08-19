@@ -3,6 +3,7 @@ package it.istat.cspro.dashboard.controller;
 import it.istat.cspro.dashboard.bean.ReportBean;
 import it.istat.cspro.dashboard.domain.DashboardReport;
 import it.istat.cspro.dashboard.domain.DashboardInfo;
+import it.istat.cspro.dashboard.domain.DashboardStatus;
 import it.istat.cspro.dashboard.service.DashboardService;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -96,4 +97,9 @@ public class BaseController {
         return service.getDashboardInfo();
     }
 
+    @ModelAttribute("dashboardStatus")
+    public DashboardStatus getDashboardStatus() {
+        return service.getDashboardStatus();
+    }
+    
 }

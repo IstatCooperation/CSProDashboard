@@ -1,5 +1,5 @@
 
 $(function () {
     setMenuActive("report-household-" + reportType);
-    populate(ctx + "/rest/report/householdBy" + reportType, 'householdlist');
+    populate(ctx + "/rest/report/householdBy" + reportType, 'householdlist', true);
 });

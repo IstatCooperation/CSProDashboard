@@ -39,4 +39,8 @@ public class TerritoryService {
     public List<SpatialPoint> getSpatialPoints(){
         return territoryDao.getSpatialPoints();
     }
+
+    public List<Object[]> getRootCoverage() {
+        return territoryDao.getRootCoverage();
+    }
 }

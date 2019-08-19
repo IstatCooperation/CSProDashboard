@@ -39,6 +39,12 @@ public class ReportRestController {
             return new ArrayList(0);
         }
     }
+    
+    @RequestMapping(value = "/rest/report/household/search/{keys}")
+    public Object objectReport(@PathVariable("keys") Integer[] keys) {
+        return processService.getEaExpectedReportBy(keys);
+    }
+    
 
     private static String getReportName(String name) {
         if (CACHE.containsKey(name)) {

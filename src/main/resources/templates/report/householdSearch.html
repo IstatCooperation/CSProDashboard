@@ -12,7 +12,8 @@
             var dashboardInfo = /*[[${dashboardInfo}]]*/;
             /*]]>*/
         </script>
-        <script th:src="@{/js/report/household.js}"></script>
+        <script th:src="@{/js/gis/territory.js}"></script>
+        <script th:src="@{/js/report/householdSearch.js}"></script>
     </head>
 
     <body>
@@ -24,7 +25,7 @@
                     <div class="content-heading">
                         <ol class="breadcrumb">
                             <li>Progress report </li>
-                            <li>Household by <span th:text="${reportType.toUpperCase()}"></span></li>
+                            <li>Search at EA level</li>
                         </ol>
                     </div>
                     <div class="container-fluid">
@@ -32,15 +33,31 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <span th:text="${reportType.toUpperCase()}"></span>
+                                        <span>Filters</span>
                                         <div class="card-header-actions">
-                                            <span>Last update:</span>&nbsp;<span th:text="${#dates.format(dashboardStatus.lastUpdate, 'dd/MM/yyyy HH:mm')}"></span>
+                                            <a class="card-header-action" href="javascript:void(0)" onclick="javascript:clearFilters();" title="Clear filters"> 
+                                                <i class="fa fa-trash-o"></i>
+                                                <span>Clear</span>
+                                            </a>
+                                             <a class="card-header-action" href="javascript:void(0)" onclick="javascript:searchData();" title="Search"> 
+                                                <i class="fa fa-search"></i>
+                                                <span>Search</span>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div id="loading-data" style="margin-top: 10px; display: none">
-                                            <i class="fa fa-refresh fa-spin fa-1x fa-fw"></i>&nbsp;<span>Loading data...</span>
-                                        </div>
+                                        <form>
+                                            <div class="form-row" id="search-filters"></div>
+                                        </form>                           
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span>Data</span>
+                                    </div>
+                                    <div class="card-body">
                                         <table id="householdlist" class="table table-striped" cellspacing="0" width="100%"></table>
                                         <div id="error-panel" style="display:none">Oops, something went wrong!</div>
                                     </div>

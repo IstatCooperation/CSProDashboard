@@ -1,5 +1,12 @@
+var table;
+var loadCompleted = false;
+setTimeout(function () {
+    if (!loadCompleted) {
+        $("#loading-data").show();
+    }
+}, 300);
 
-function populate(url, tableId) {
+function populate(url, tableId, searchFilters) {
     var clean;
     if (!dashboardInfo.listing && !dashboardInfo.expected) {
         clean = function (a) {
@@ -46,7 +53,7 @@ function populate(url, tableId) {
             columnsSet[columnsSet.length - 2] = {title: 'Field/Exp', render: $.fn.dataTable.render.number(',', '.', 1), 'className': 'numeric'};
             columnsSet[columnsSet.length - 1] = {title: 'List/Exp', render: $.fn.dataTable.render.number(',', '.', 1), 'className': 'numeric'};
             clean(columnsSet);
-            __populate(data, columnsSet, tableId);
+            __populate(data, columnsSet, tableId, searchFilters);
         },
         error: function (json) {
             $("#error-panel").show();
@@ -55,7 +62,7 @@ function populate(url, tableId) {
 
 }
 
-function __populate(dataSet, columnsSet, tableId) {
+function __populate(dataSet, columnsSet, tableId, searchFilters) {
     var tFoot = $(document.createElement('tfoot'));
     var footTr = $(document.createElement('tr'));
     $('#' + tableId).append(tFoot.append(footTr));
@@ -66,27 +73,45 @@ function __populate(dataSet, columnsSet, tableId) {
         }
         footTr.append($(document.createElement('th')));
     }
-    var table = $('#' + tableId).DataTable({
+    table = $('#' + tableId).DataTable({
         data: dataSet,
         columns: columnsSet,
-        responsive: true,
+        scrollX: true,
+        //responsive: true,
         lengthChange: false,
-        pageLength: 10,
+        pageLength: 15,
         order: [[0, "asc"]],
-        buttons: ['csv', 'excel', 'pdf'],
+        buttons: [{
+                extend: 'csvHtml5',
+                filename: 'household',
+                title: 'household'
+            }, {
+                extend: 'excelHtml5',
+                filename: 'household',
+                title: 'household'
+            }, {
+                extend: 'pdfHtml5',
+                filename: 'household',
+                title: 'household'
+            }],
         initComplete: function () {
-            this.api().columns(filters).every(function () {
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                        .appendTo($(column.footer()).empty())
-                        .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                            column.search(val ? '^' + val + '$' : '', true, false).draw();
-                        });
-                column.data().unique().sort().each(function (d, j) {
-                    select.append('<option value="' + d + '">' + d + '</option>');
+            if (searchFilters) {
+                this.api().columns(filters).every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                            });
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>');
+                    });
                 });
-            });
+            }
+
+            $("#loading-data").hide();
+            loadCompleted = true;
         }
     });
     table.buttons().container().appendTo('#' + tableId + '_wrapper .col-sm-6:eq(0)');
