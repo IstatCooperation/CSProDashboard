@@ -41,7 +41,7 @@
                                             <em class="fa fa-tablet fa-3x"></em>
                                         </div>
                                         <div class="col-xs-8 widget-content">
-                                            <div class="h2 mt0" id="householdFieldwork"></div>
+                                            <div class="content" id="householdFieldwork"></div>
                                             <div class="text-uppercase">Enumeration</div>
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                                             <em class="fa fa-bars fa-3x"></em>
                                         </div>
                                         <div class="col-xs-8 widget-content">
-                                            <div class="h2 mt0" id="householdFreshlist"></div>
+                                            <div class="content" id="householdFreshlist"></div>
                                             <div class="text-uppercase">Listing</div>
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                                             <em class="fa fa-map-o fa-3x"></em>
                                         </div>
                                         <div class="col-xs-8 widget-content">
-                                            <div class="h2 mt0" id="householdExpected"></div>
+                                            <div class="content" id="householdExpected"></div>
                                             <div class="text-uppercase">Mapping</div>
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                             <div class="col-lg-3" th:if="${dashboardInfo.expected}">
                                 <div class="card">
                                     <div class="card-header">
-                                        <span>Field Work / Expected</span>
+                                        <span>Enumeration / Mapping</span>
                                     </div>
                                     <div class="card-body" style="text-align: center;">
                                         <canvas class="fieldworkExpected"></canvas>           
@@ -103,7 +103,7 @@
                             <div class="col-lg-3" th:if="${dashboardInfo.expected}">
                                 <div class="card">
                                     <div class="card-header">
-                                        <span>Freshlist / Expected</span>
+                                        <span>Listing / Mapping</span>
                                     </div>
                                     <div class="card-body" style="text-align: center;">
                                         <canvas class="freshlistExpected"></canvas>           

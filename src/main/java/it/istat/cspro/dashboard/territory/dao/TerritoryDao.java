@@ -198,16 +198,28 @@ public class TerritoryDao {
         DashboardReportType reportType = new DashboardReportType();
         reportType.setId(Utility.REPORT_PROGRESS_ID);
         List<DashboardReport> reports = dashboardReportDao.findByTypeOrderByTerritoryLevel(reportType);
-
+        List<Object[]> out = new ArrayList<>();
+        int field, freshList;
         String queryString;
         if (reports != null && !reports.isEmpty()) {
-            queryString = "SELECT name, field_freshlist FROM " + Utility.TABLE_PREFIX_MATERIALIZED + reports.get(0).getTableName() //get root territory
-                    + " where field_freshlist is not null";
+            queryString = "SELECT name, field, freshlist FROM " + Utility.TABLE_PREFIX_MATERIALIZED + reports.get(0).getTableName() //get root territory
+                    + " where field is not null";
             Query query = em.createNativeQuery(queryString);
-            return query.getResultList();
+            List<Object[]> results = query.getResultList();
+            for (Object[] result : results) {
+                Object[] item = new Object[2];
+                item[0] = result[0];
+                field = (result[1] != null) ? ((BigDecimal) result[1]).intValue() : -1;
+                freshList = (result[2] != null) ? ((BigDecimal) result[2]).intValue() : -1;
+                if (freshList > 0) {
+                    item[1] = (double) field / freshList * 100;
+                } else {
+                    item[1] = (double) 0;
+                }
+                out.add(item);
+            }
         }
-
-        return null;
+        return out;
     }
 
 }

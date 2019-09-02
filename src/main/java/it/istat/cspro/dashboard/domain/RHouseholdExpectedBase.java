@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  *
@@ -22,8 +23,11 @@ public class RHouseholdExpectedBase implements Serializable {
     private Integer field;
     private Integer freshlist;
     private Integer expected;
+    @Transient
     private Double field_freshlist;
+    @Transient
     private Double field_expected;
+    @Transient
     private Double freshlist_expected;
 
     public int getId() {

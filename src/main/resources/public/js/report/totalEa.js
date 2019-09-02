@@ -5,7 +5,7 @@ $(function () {
         $('#eaFieldwork').text(format(report[0][1]));
         $('#eaFreshlist').text(format(report[0][2]));
         $('#eaExpected').text(format(report[0][3]));
-        if ($('.fieldworkFreshlist').length > 0)
+        if ($('.fieldworkFreshlist').length > 0 && report[0][2] > 0)
             $('.fieldworkFreshlist').ClassyLoader({
                 percentage: 100. * report[0][1] / report[0][2],
                 speed: 20,
@@ -17,7 +17,7 @@ $(function () {
                 remainingLineColor: 'rgba(200,200,200,0.4)',
                 lineWidth: 10
             });
-        if ($('.fieldworkExpected').length > 0)
+        if ($('.fieldworkExpected').length > 0 && report[0][3] > 0)
             $('.fieldworkExpected').ClassyLoader({
                 percentage: 100. * report[0][1] / report[0][3],
                 speed: 20,
@@ -29,7 +29,7 @@ $(function () {
                 remainingLineColor: 'rgba(200,200,200,0.4)',
                 lineWidth: 10
             });
-        if ($('.freshlistExpected').length > 0)
+        if ($('.freshlistExpected').length > 0 && report[0][3] > 0)
             $('.freshlistExpected').ClassyLoader({
                 percentage: 100. * report[0][2] / report[0][3],
                 speed: 20,

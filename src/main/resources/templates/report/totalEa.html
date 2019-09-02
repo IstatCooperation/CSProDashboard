@@ -26,13 +26,6 @@
                         </ol>
                     </div>
                     <div class="container-fluid">
-                        <!--div class="bs-callout">
-                            <h4>Report description</h4>
-                            <p>
-                                An Enumeration Area is considered to be returned when at least one 
-                                questionnaire arrived at CSA
-                            </p>
-                        </div-->
                         <div class="row">
                             <!-- START WIDGET -->
                             <div class="col-lg-3 col-sm-6">
@@ -92,7 +85,7 @@
                             <div class="col-lg-3" th:if="${dashboardInfo.expected}">
                                 <div class="card">
                                     <div class="card-header">
-                                        <span>Field Work / Expected</span>
+                                        <span>Enumeration / Mapping</span>
                                     </div>
                                     <div class="card-body" style="text-align: center;">
                                         <canvas class="fieldworkExpected"></canvas>           
@@ -104,7 +97,7 @@
                             <div class="col-lg-3" th:if="${dashboardInfo.expected}">
                                 <div class="card">
                                     <div class="card-header">
-                                        <span>Freshlist / Expected</span>
+                                        <span>Listing / Mapping</span>
                                     </div>
                                     <div class="card-body" style="text-align: center;">
                                         <canvas class="freshlistExpected"></canvas>           
