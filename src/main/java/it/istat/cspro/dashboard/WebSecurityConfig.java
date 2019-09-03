@@ -37,8 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/libs/**", "/js/**", "/img/**", "/css/**", "/fonts/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login").permitAll().successForwardUrl("/")
+                .formLogin().defaultSuccessUrl("/", true)
+                .loginPage("/login").permitAll()
                 .and()
                 .logout().logoutUrl("/users/logout").logoutSuccessUrl("/");
     }

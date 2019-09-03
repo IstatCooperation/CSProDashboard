@@ -36,7 +36,7 @@ function toggleMenu(load) {
 function format(n) {
     
     if(n === undefined || n === null){
-        return "";
+        return 0;
     }
     
     if (Math.round(n) === n) {
