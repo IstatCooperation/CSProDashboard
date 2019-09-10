@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head th:replace="layout :: site-head"/>
     <head>
@@ -10,34 +10,42 @@
     </head>
 
     <body>
-
         <div class="wrapper">    
             <header th:replace="layout :: site-header" />
             <aside th:replace="layout :: site-aside" />
-
             <section>
                 <div class="content-wrapper">
                     <div class="content-heading">
-                        Loader Errors
-                        <small>CSPro2Sql</small>
+                        <ol class="breadcrumb">
+                            <li>Cspro2sql</li>
+                            <li>Loader errors</li>
+                        </ol>
                     </div>
                     <div class="container-fluid">
-                        <div class="row mb-lg"> 
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <table id="errorslist" class="table table-striped" cellspacing="0" width="100%">
-                                    </table>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <span>ERRORS</span>
+                                        <div class="card-header-actions">
+                                            <span>Last update:</span>&nbsp;<span th:text="${#dates.format(dashboardStatus.lastUpdate, 'dd/MM/yyyy HH:mm')}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="loading-data" style="margin-top: 10px; display: none">
+                                            <i class="fa fa-refresh fa-spin fa-1x fa-fw"></i>&nbsp;<span>Loading data...</span>
+                                        </div>
+                                        <table id="errorslist" class="table table-striped" cellspacing="0" width="100%"></table>
+                                        <div id="error-panel" style="display:none">Oops, something went wrong!</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
             <footer th:replace="layout :: site-footer" />
-
         </div>
     </body>
-
 </html>
 

@@ -399,7 +399,7 @@ footer img{
 }
 .widget.panel, .widget .panel {
     overflow: hidden;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 .row-table {
     display: table;
